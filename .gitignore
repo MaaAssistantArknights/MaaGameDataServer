@@ -1,0 +1,12 @@
+.vscode
+.idea
+
+# build directory
+build
+cmake-build-*
+
+Debug/*
+
+thirdparty
+
+!.gitkeep

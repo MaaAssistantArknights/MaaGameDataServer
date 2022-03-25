@@ -20,3 +20,9 @@ inline std::string toString(const Json::Value& json) {
   writer->write(json, &stream);
   return stream.str();
 }
+
+inline Json::Value fromString(const std::string& sJson) {
+  Json::Reader reader;
+  Json::Value root;
+  return reader.parse(sJson, root) ? root : Json::Value::null;
+}

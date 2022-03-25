@@ -152,7 +152,6 @@ class Activity
     const std::shared_ptr<int64_t> &getStarttime() const noexcept;
     ///Set the value of the column startTime
     void setStarttime(const int64_t &pStarttime) noexcept;
-    void setStarttimeToNull() noexcept;
 
     /**  For column endTime  */
     ///Get the value of the column endTime, returns the default value if the column is null
@@ -161,7 +160,6 @@ class Activity
     const std::shared_ptr<int64_t> &getEndtime() const noexcept;
     ///Set the value of the column endTime
     void setEndtime(const int64_t &pEndtime) noexcept;
-    void setEndtimeToNull() noexcept;
 
     /**  For column rewardEndTime  */
     ///Get the value of the column rewardEndTime, returns the default value if the column is null
@@ -170,7 +168,6 @@ class Activity
     const std::shared_ptr<int64_t> &getRewardendtime() const noexcept;
     ///Set the value of the column rewardEndTime
     void setRewardendtime(const int64_t &pRewardendtime) noexcept;
-    void setRewardendtimeToNull() noexcept;
 
     /**  For column displayOnHome  */
     ///Get the value of the column displayOnHome, returns the default value if the column is null

@@ -21,6 +21,16 @@ void DataSync::initAndStart(const Json::Value &config) {
 }
 
 void DataSync::doSync() {
+  syncActivities();
+  
+  auto cronexpr = cron::make_cron("0 30 4,16 * * *");
+  auto now = time(nullptr);
+  auto diff = cron::cron_next(cronexpr, now) - now;
+  loop_->runAfter(std::chrono::seconds(diff), [this] { doSync(); });
+  std::cout << "Timer added\n";
+}
+
+bool DataSync::syncActivities() {
   std::ifstream ifs(
       "./repo/ArknightsGameData/zh_CN/gamedata/excel/activity_table.json");
   Json::Reader reader;
@@ -53,11 +63,7 @@ void DataSync::doSync() {
   } else {
     std::cerr << "Json parse error";
   }
-  auto cronexpr = cron::make_cron("0 30 4,16 * * *");
-  auto now = time(nullptr);
-  auto diff = cron::cron_next(cronexpr, now) - now;
-  loop_->runAfter(std::chrono::seconds(diff), [this] { doSync(); });
-  std::cout << "Timer added\n";
+  return success;
 }
 
 void DataSync::shutdown() {

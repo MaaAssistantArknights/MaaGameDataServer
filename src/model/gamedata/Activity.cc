@@ -37,9 +37,9 @@ const std::vector<typename Activity::MetaData> Activity::metaData_={
 {"type","std::string","varchar(255)",255,0,0,1},
 {"displayType","std::string","varchar(255)",255,0,0,0},
 {"name","std::string","varchar(255)",255,0,0,1},
-{"startTime","int64_t","bigint",8,0,0,0},
-{"endTime","int64_t","bigint",8,0,0,0},
-{"rewardEndTime","int64_t","bigint",8,0,0,0},
+{"startTime","int64_t","bigint",8,0,0,1},
+{"endTime","int64_t","bigint",8,0,0,1},
+{"rewardEndTime","int64_t","bigint",8,0,0,1},
 {"displayOnHome","int8_t","tinyint(1)",1,0,0,1},
 {"hasStage","int8_t","tinyint(1)",1,0,0,1},
 {"actTopBarColor","std::string","varchar(255)",255,0,0,0},
@@ -826,11 +826,6 @@ void Activity::setStarttime(const int64_t &pStarttime) noexcept
     starttime_ = std::make_shared<int64_t>(pStarttime);
     dirtyFlag_[4] = true;
 }
-void Activity::setStarttimeToNull() noexcept
-{
-    starttime_.reset();
-    dirtyFlag_[4] = true;
-}
 
 const int64_t &Activity::getValueOfEndtime() const noexcept
 {
@@ -848,11 +843,6 @@ void Activity::setEndtime(const int64_t &pEndtime) noexcept
     endtime_ = std::make_shared<int64_t>(pEndtime);
     dirtyFlag_[5] = true;
 }
-void Activity::setEndtimeToNull() noexcept
-{
-    endtime_.reset();
-    dirtyFlag_[5] = true;
-}
 
 const int64_t &Activity::getValueOfRewardendtime() const noexcept
 {
@@ -868,11 +858,6 @@ const std::shared_ptr<int64_t> &Activity::getRewardendtime() const noexcept
 void Activity::setRewardendtime(const int64_t &pRewardendtime) noexcept
 {
     rewardendtime_ = std::make_shared<int64_t>(pRewardendtime);
-    dirtyFlag_[6] = true;
-}
-void Activity::setRewardendtimeToNull() noexcept
-{
-    rewardendtime_.reset();
     dirtyFlag_[6] = true;
 }
 
@@ -1956,15 +1941,30 @@ bool Activity::validateJsonForCreation(const Json::Value &pJson, std::string &er
         if(!validJsonOfField(4, "startTime", pJson["startTime"], err, true))
             return false;
     }
+    else
+    {
+        err="The startTime column cannot be null";
+        return false;
+    }
     if(pJson.isMember("endTime"))
     {
         if(!validJsonOfField(5, "endTime", pJson["endTime"], err, true))
             return false;
     }
+    else
+    {
+        err="The endTime column cannot be null";
+        return false;
+    }
     if(pJson.isMember("rewardEndTime"))
     {
         if(!validJsonOfField(6, "rewardEndTime", pJson["rewardEndTime"], err, true))
             return false;
+    }
+    else
+    {
+        err="The rewardEndTime column cannot be null";
+        return false;
     }
     if(pJson.isMember("displayOnHome"))
     {
@@ -2087,6 +2087,11 @@ bool Activity::validateMasqueradedJsonForCreation(const Json::Value &pJson,
               if(!validJsonOfField(4, pMasqueradingVector[4], pJson[pMasqueradingVector[4]], err, true))
                   return false;
           }
+        else
+        {
+            err="The " + pMasqueradingVector[4] + " column cannot be null";
+            return false;
+        }
       }
       if(!pMasqueradingVector[5].empty())
       {
@@ -2095,6 +2100,11 @@ bool Activity::validateMasqueradedJsonForCreation(const Json::Value &pJson,
               if(!validJsonOfField(5, pMasqueradingVector[5], pJson[pMasqueradingVector[5]], err, true))
                   return false;
           }
+        else
+        {
+            err="The " + pMasqueradingVector[5] + " column cannot be null";
+            return false;
+        }
       }
       if(!pMasqueradingVector[6].empty())
       {
@@ -2103,6 +2113,11 @@ bool Activity::validateMasqueradedJsonForCreation(const Json::Value &pJson,
               if(!validJsonOfField(6, pMasqueradingVector[6], pJson[pMasqueradingVector[6]], err, true))
                   return false;
           }
+        else
+        {
+            err="The " + pMasqueradingVector[6] + " column cannot be null";
+            return false;
+        }
       }
       if(!pMasqueradingVector[7].empty())
       {
@@ -2467,7 +2482,8 @@ bool Activity::validJsonOfField(size_t index,
         case 4:
             if(pJson.isNull())
             {
-                return true;
+                err="The " + fieldName + " column cannot be null";
+                return false;
             }
             if(!pJson.isInt64())
             {
@@ -2478,7 +2494,8 @@ bool Activity::validJsonOfField(size_t index,
         case 5:
             if(pJson.isNull())
             {
-                return true;
+                err="The " + fieldName + " column cannot be null";
+                return false;
             }
             if(!pJson.isInt64())
             {
@@ -2489,7 +2506,8 @@ bool Activity::validJsonOfField(size_t index,
         case 6:
             if(pJson.isNull())
             {
-                return true;
+                err="The " + fieldName + " column cannot be null";
+                return false;
             }
             if(!pJson.isInt64())
             {

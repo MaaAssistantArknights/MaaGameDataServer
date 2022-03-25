@@ -33,7 +33,15 @@ public:
   /// It must be implemented by the user.
   virtual void shutdown() override;
 
+private:
   void doSync();
+
+  bool syncActivities();
+  bool syncCharacters();
+  bool syncItems();
+  bool syncSkills();
+  bool syncStages();
+  bool syncZones();
 
 private:
   trantor::EventLoop *loop_ = nullptr;

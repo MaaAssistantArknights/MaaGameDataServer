@@ -17,9 +17,38 @@
   "password": "local.ChingC@7",
   //client_encoding: The character set used by drogon_ctl. it is empty string by default which
   //means use the default character set.
-  //"client_encoding": "utf-8",
+  "client_encoding": "utf8mb4",
   //table: An array of tables to be modelized. if the array is empty, all revealed tables are modelized.
   "tables": [],
+  
+  "convert": {
+    "enabled": false,
+    "items": [
+      {
+        "table": "characters",
+        "column": "tagList",
+        "method": {
+          "after_db_read": "converter::json::AfterDbRead",
+          "before_db_write": "converter::json::BeforeDbWrite"
+        },
+        "includes": [
+          "<util/converter.h>"
+        ]
+      },
+      {
+        "table": "activity",
+        "column": "ungroupedMedalIds",
+        "method": {
+          "after_db_read": "converter::json::AfterDbRead",
+          "before_db_write": "converter::json::BeforeDbWrite"
+        },
+        "includes": [
+          "<util/converter.h>"
+        ]
+      }
+    ]
+  },
+
   "relationships": {
     "enabled": false
     //    "items": [
@@ -83,5 +112,5 @@
     "directory": "../../controller/rest/gamedata",
     // generate_base_only: false by default. Set to true to avoid overwriting custom subclasses.
     "generate_base_only": false
-  }
+  },
 }

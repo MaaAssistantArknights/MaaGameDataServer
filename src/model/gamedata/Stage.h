@@ -36,8 +36,6 @@ namespace drogon_model
 {
 namespace MaaGameData
 {
-namespace gamedata
-{
 
 class Stage
 {
@@ -280,20 +278,20 @@ class Stage
 
     /**  For column canPractice  */
     ///Get the value of the column canPractice, returns the default value if the column is null
-    const bool &getValueOfCanpractice() const noexcept;
+    const int8_t &getValueOfCanpractice() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getCanpractice() const noexcept;
+    const std::shared_ptr<int8_t> &getCanpractice() const noexcept;
     ///Set the value of the column canPractice
-    void setCanpractice(const bool &pCanpractice) noexcept;
+    void setCanpractice(const int8_t &pCanpractice) noexcept;
     void setCanpracticeToNull() noexcept;
 
     /**  For column canBattleReplay  */
     ///Get the value of the column canBattleReplay, returns the default value if the column is null
-    const bool &getValueOfCanbattlereplay() const noexcept;
+    const int8_t &getValueOfCanbattlereplay() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getCanbattlereplay() const noexcept;
+    const std::shared_ptr<int8_t> &getCanbattlereplay() const noexcept;
     ///Set the value of the column canBattleReplay
-    void setCanbattlereplay(const bool &pCanbattlereplay) noexcept;
+    void setCanbattlereplay(const int8_t &pCanbattlereplay) noexcept;
     void setCanbattlereplayToNull() noexcept;
 
     /**  For column apCost  */
@@ -463,56 +461,56 @@ class Stage
 
     /**  For column hilightMark  */
     ///Get the value of the column hilightMark, returns the default value if the column is null
-    const bool &getValueOfHilightmark() const noexcept;
+    const int8_t &getValueOfHilightmark() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getHilightmark() const noexcept;
+    const std::shared_ptr<int8_t> &getHilightmark() const noexcept;
     ///Set the value of the column hilightMark
-    void setHilightmark(const bool &pHilightmark) noexcept;
+    void setHilightmark(const int8_t &pHilightmark) noexcept;
     void setHilightmarkToNull() noexcept;
 
     /**  For column bossMark  */
     ///Get the value of the column bossMark, returns the default value if the column is null
-    const bool &getValueOfBossmark() const noexcept;
+    const int8_t &getValueOfBossmark() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getBossmark() const noexcept;
+    const std::shared_ptr<int8_t> &getBossmark() const noexcept;
     ///Set the value of the column bossMark
-    void setBossmark(const bool &pBossmark) noexcept;
+    void setBossmark(const int8_t &pBossmark) noexcept;
     void setBossmarkToNull() noexcept;
 
     /**  For column isPredefined  */
     ///Get the value of the column isPredefined, returns the default value if the column is null
-    const bool &getValueOfIspredefined() const noexcept;
+    const int8_t &getValueOfIspredefined() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getIspredefined() const noexcept;
+    const std::shared_ptr<int8_t> &getIspredefined() const noexcept;
     ///Set the value of the column isPredefined
-    void setIspredefined(const bool &pIspredefined) noexcept;
+    void setIspredefined(const int8_t &pIspredefined) noexcept;
     void setIspredefinedToNull() noexcept;
 
     /**  For column isHardPredefined  */
     ///Get the value of the column isHardPredefined, returns the default value if the column is null
-    const bool &getValueOfIshardpredefined() const noexcept;
+    const int8_t &getValueOfIshardpredefined() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getIshardpredefined() const noexcept;
+    const std::shared_ptr<int8_t> &getIshardpredefined() const noexcept;
     ///Set the value of the column isHardPredefined
-    void setIshardpredefined(const bool &pIshardpredefined) noexcept;
+    void setIshardpredefined(const int8_t &pIshardpredefined) noexcept;
     void setIshardpredefinedToNull() noexcept;
 
     /**  For column isSkillSelectablePredefined  */
     ///Get the value of the column isSkillSelectablePredefined, returns the default value if the column is null
-    const bool &getValueOfIsskillselectablepredefined() const noexcept;
+    const int8_t &getValueOfIsskillselectablepredefined() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getIsskillselectablepredefined() const noexcept;
+    const std::shared_ptr<int8_t> &getIsskillselectablepredefined() const noexcept;
     ///Set the value of the column isSkillSelectablePredefined
-    void setIsskillselectablepredefined(const bool &pIsskillselectablepredefined) noexcept;
+    void setIsskillselectablepredefined(const int8_t &pIsskillselectablepredefined) noexcept;
     void setIsskillselectablepredefinedToNull() noexcept;
 
     /**  For column isStoryOnly  */
     ///Get the value of the column isStoryOnly, returns the default value if the column is null
-    const bool &getValueOfIsstoryonly() const noexcept;
+    const int8_t &getValueOfIsstoryonly() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getIsstoryonly() const noexcept;
+    const std::shared_ptr<int8_t> &getIsstoryonly() const noexcept;
     ///Set the value of the column isStoryOnly
-    void setIsstoryonly(const bool &pIsstoryonly) noexcept;
+    void setIsstoryonly(const int8_t &pIsstoryonly) noexcept;
     void setIsstoryonlyToNull() noexcept;
 
     /**  For column appearanceStyle  */
@@ -536,11 +534,11 @@ class Stage
 
     /**  For column isStagePatch  */
     ///Get the value of the column isStagePatch, returns the default value if the column is null
-    const bool &getValueOfIsstagepatch() const noexcept;
+    const int8_t &getValueOfIsstagepatch() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getIsstagepatch() const noexcept;
+    const std::shared_ptr<int8_t> &getIsstagepatch() const noexcept;
     ///Set the value of the column isStagePatch
-    void setIsstagepatch(const bool &pIsstagepatch) noexcept;
+    void setIsstagepatch(const int8_t &pIsstagepatch) noexcept;
     void setIsstagepatchToNull() noexcept;
 
     /**  For column mainStageId  */
@@ -585,8 +583,8 @@ class Stage
     std::shared_ptr<std::string> dangerlevel_;
     std::shared_ptr<std::string> dangerpoint_;
     std::shared_ptr<std::string> loadingpicid_;
-    std::shared_ptr<bool> canpractice_;
-    std::shared_ptr<bool> canbattlereplay_;
+    std::shared_ptr<int8_t> canpractice_;
+    std::shared_ptr<int8_t> canbattlereplay_;
     std::shared_ptr<int32_t> apcost_;
     std::shared_ptr<int32_t> apfailreturn_;
     std::shared_ptr<std::string> etitemid_;
@@ -605,15 +603,15 @@ class Stage
     std::shared_ptr<int32_t> completefavor_;
     std::shared_ptr<int32_t> slprogress_;
     std::shared_ptr<std::string> displaymainitem_;
-    std::shared_ptr<bool> hilightmark_;
-    std::shared_ptr<bool> bossmark_;
-    std::shared_ptr<bool> ispredefined_;
-    std::shared_ptr<bool> ishardpredefined_;
-    std::shared_ptr<bool> isskillselectablepredefined_;
-    std::shared_ptr<bool> isstoryonly_;
+    std::shared_ptr<int8_t> hilightmark_;
+    std::shared_ptr<int8_t> bossmark_;
+    std::shared_ptr<int8_t> ispredefined_;
+    std::shared_ptr<int8_t> ishardpredefined_;
+    std::shared_ptr<int8_t> isskillselectablepredefined_;
+    std::shared_ptr<int8_t> isstoryonly_;
     std::shared_ptr<int32_t> appearancestyle_;
     std::shared_ptr<std::string> startbuttonoverrideid_;
-    std::shared_ptr<bool> isstagepatch_;
+    std::shared_ptr<int8_t> isstagepatch_;
     std::shared_ptr<std::string> mainstageid_;
     struct MetaData
     {
@@ -630,13 +628,13 @@ class Stage
   public:
     static const std::string &sqlForFindingByPrimaryKey()
     {
-        static const std::string sql="select * from " + tableName + " where stageId = $1";
+        static const std::string sql="select * from " + tableName + " where stageId = ?";
         return sql;
     }
 
     static const std::string &sqlForDeletingByPrimaryKey()
     {
-        static const std::string sql="delete from " + tableName + " where stageId = $1";
+        static const std::string sql="delete from " + tableName + " where stageId = ?";
         return sql;
     }
     std::string sqlForInserting(bool &needSelection) const
@@ -872,245 +870,234 @@ class Stage
         else
             sql += ") values (";
 
-        int placeholder=1;
-        char placeholderStr[64];
-        size_t n=0;
         if(dirtyFlag_[0])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[1])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[2])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[3])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[4])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[5])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[6])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[7])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[8])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[9])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[10])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[11])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[12])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[13])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[14])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[15])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[16])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[17])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[18])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[19])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[20])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[21])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[22])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[23])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[24])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[25])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[26])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[27])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[28])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[29])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[30])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[31])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[32])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[33])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[34])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[35])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[36])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[37])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[38])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[39])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[40])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[41])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[42])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[43])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(parametersCount > 0)
         {
             sql.resize(sql.length() - 1);
         }
-        if(needSelection)
-        {
-            sql.append(") returning *");
-        }
-        else
-        {
-            sql.append(1, ')');
-        }
+        sql.append(1, ')');
         LOG_TRACE << sql;
         return sql;
     }
 };
-} // namespace gamedata
 } // namespace MaaGameData
 } // namespace drogon_model

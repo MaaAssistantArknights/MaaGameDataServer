@@ -11,7 +11,7 @@
 
 using namespace drogon;
 using namespace drogon::orm;
-using namespace drogon_model::MaaGameData::gamedata;
+using namespace drogon_model::MaaGameData;
 
 const std::string Zone::Cols::_zoneId = "zoneId";
 const std::string Zone::Cols::_zoneIndex = "zoneIndex";
@@ -26,20 +26,20 @@ const std::string Zone::Cols::_lockedText = "lockedText";
 const std::string Zone::Cols::_canPreview = "canPreview";
 const std::string Zone::primaryKeyName = "zoneId";
 const bool Zone::hasPrimaryKey = true;
-const std::string Zone::tableName = "gamedata.zone";
+const std::string Zone::tableName = "zone";
 
 const std::vector<typename Zone::MetaData> Zone::metaData_={
-{"zoneId","std::string","character varying",0,0,1,1},
-{"zoneIndex","int32_t","integer",4,0,0,0},
-{"type","std::string","character varying",255,0,0,0},
-{"zoneNameFirst","std::string","character varying",255,0,0,0},
-{"zoneNameSecond","std::string","character varying",255,0,0,0},
-{"zoneNameTitleCurrent","std::string","character varying",255,0,0,0},
-{"zoneNameTitleUncurrent","std::string","character varying",255,0,0,0},
-{"zoneNameTitleEx","std::string","character varying",255,0,0,0},
-{"zoneNameThird","std::string","character varying",255,0,0,0},
-{"lockedText","std::string","character varying",255,0,0,0},
-{"canPreview","bool","boolean",1,0,0,0}
+{"zoneId","std::string","varchar(255)",255,0,1,1},
+{"zoneIndex","int32_t","int",4,0,0,0},
+{"type","std::string","varchar(255)",255,0,0,0},
+{"zoneNameFirst","std::string","varchar(255)",255,0,0,0},
+{"zoneNameSecond","std::string","varchar(255)",255,0,0,0},
+{"zoneNameTitleCurrent","std::string","varchar(255)",255,0,0,0},
+{"zoneNameTitleUncurrent","std::string","varchar(255)",255,0,0,0},
+{"zoneNameTitleEx","std::string","varchar(255)",255,0,0,0},
+{"zoneNameThird","std::string","varchar(255)",255,0,0,0},
+{"lockedText","std::string","varchar(255)",255,0,0,0},
+{"canPreview","int8_t","tinyint(1)",1,0,0,0}
 };
 const std::string &Zone::getColumnName(size_t index) noexcept(false)
 {
@@ -92,7 +92,7 @@ Zone::Zone(const Row &r, const ssize_t indexOffset) noexcept
         }
         if(!r["canPreview"].isNull())
         {
-            canpreview_=std::make_shared<bool>(r["canPreview"].as<bool>());
+            canpreview_=std::make_shared<int8_t>(r["canPreview"].as<int8_t>());
         }
     }
     else
@@ -157,7 +157,7 @@ Zone::Zone(const Row &r, const ssize_t indexOffset) noexcept
         index = offset + 10;
         if(!r[index].isNull())
         {
-            canpreview_=std::make_shared<bool>(r[index].as<bool>());
+            canpreview_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
     }
 
@@ -255,7 +255,7 @@ Zone::Zone(const Json::Value &pJson, const std::vector<std::string> &pMasqueradi
         dirtyFlag_[10] = true;
         if(!pJson[pMasqueradingVector[10]].isNull())
         {
-            canpreview_=std::make_shared<bool>(pJson[pMasqueradingVector[10]].asBool());
+            canpreview_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[10]].asInt64());
         }
     }
 }
@@ -347,7 +347,7 @@ Zone::Zone(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[10]=true;
         if(!pJson["canPreview"].isNull())
         {
-            canpreview_=std::make_shared<bool>(pJson["canPreview"].asBool());
+            canpreview_=std::make_shared<int8_t>((int8_t)pJson["canPreview"].asInt64());
         }
     }
 }
@@ -444,7 +444,7 @@ void Zone::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[10] = true;
         if(!pJson[pMasqueradingVector[10]].isNull())
         {
-            canpreview_=std::make_shared<bool>(pJson[pMasqueradingVector[10]].asBool());
+            canpreview_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[10]].asInt64());
         }
     }
 }
@@ -535,7 +535,7 @@ void Zone::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[10] = true;
         if(!pJson["canPreview"].isNull())
         {
-            canpreview_=std::make_shared<bool>(pJson["canPreview"].asBool());
+            canpreview_=std::make_shared<int8_t>((int8_t)pJson["canPreview"].asInt64());
         }
     }
 }
@@ -805,20 +805,20 @@ void Zone::setLockedtextToNull() noexcept
     dirtyFlag_[9] = true;
 }
 
-const bool &Zone::getValueOfCanpreview() const noexcept
+const int8_t &Zone::getValueOfCanpreview() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(canpreview_)
         return *canpreview_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Zone::getCanpreview() const noexcept
+const std::shared_ptr<int8_t> &Zone::getCanpreview() const noexcept
 {
     return canpreview_;
 }
-void Zone::setCanpreview(const bool &pCanpreview) noexcept
+void Zone::setCanpreview(const int8_t &pCanpreview) noexcept
 {
-    canpreview_ = std::make_shared<bool>(pCanpreview);
+    canpreview_ = std::make_shared<int8_t>(pCanpreview);
     dirtyFlag_[10] = true;
 }
 void Zone::setCanpreviewToNull() noexcept
@@ -1799,6 +1799,15 @@ bool Zone::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 1:
             if(pJson.isNull())
@@ -1976,7 +1985,7 @@ bool Zone::validJsonOfField(size_t index,
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;

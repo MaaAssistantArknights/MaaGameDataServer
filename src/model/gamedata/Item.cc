@@ -11,7 +11,7 @@
 
 using namespace drogon;
 using namespace drogon::orm;
-using namespace drogon_model::MaaGameData::gamedata;
+using namespace drogon_model::MaaGameData;
 
 const std::string Item::Cols::_itemId = "itemId";
 const std::string Item::Cols::_name = "name";
@@ -29,21 +29,21 @@ const std::string Item::Cols::_stageDropList = "stageDropList";
 const std::string Item::Cols::_buildingProductList = "buildingProductList";
 const std::string Item::primaryKeyName = "itemId";
 const bool Item::hasPrimaryKey = true;
-const std::string Item::tableName = "gamedata.item";
+const std::string Item::tableName = "item";
 
 const std::vector<typename Item::MetaData> Item::metaData_={
-{"itemId","std::string","character varying",255,0,1,1},
-{"name","std::string","character varying",255,0,0,1},
-{"description","std::string","character varying",255,0,0,1},
-{"rarity","int32_t","integer",4,0,0,1},
-{"iconId","std::string","character varying",0,0,0,1},
-{"overrideBkg","std::string","character varying",255,0,0,0},
-{"stackIconId","std::string","character varying",0,0,0,0},
-{"sortId","int32_t","integer",4,0,0,1},
-{"usage","std::string","character varying",255,0,0,1},
-{"obtainApproach","std::string","character varying",255,0,0,0},
-{"classifyType","std::string","character varying",255,0,0,1},
-{"itemType","std::string","character varying",255,0,0,1},
+{"itemId","std::string","varchar(255)",255,0,1,1},
+{"name","std::string","varchar(255)",255,0,0,1},
+{"description","std::string","varchar(255)",255,0,0,1},
+{"rarity","int32_t","int",4,0,0,1},
+{"iconId","std::string","varchar(255)",255,0,0,1},
+{"overrideBkg","std::string","varchar(255)",255,0,0,0},
+{"stackIconId","std::string","varchar(255)",255,0,0,0},
+{"sortId","int32_t","int",4,0,0,1},
+{"usage","std::string","varchar(255)",255,0,0,1},
+{"obtainApproach","std::string","varchar(255)",255,0,0,0},
+{"classifyType","std::string","varchar(255)",255,0,0,1},
+{"itemType","std::string","varchar(255)",255,0,0,1},
 {"stageDropList","std::string","json",0,0,0,1},
 {"buildingProductList","std::string","json",0,0,0,1}
 };
@@ -2365,6 +2365,15 @@ bool Item::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 5:
             if(pJson.isNull())
@@ -2396,6 +2405,15 @@ bool Item::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 7:
             if(pJson.isNull())

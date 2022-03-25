@@ -11,7 +11,7 @@
 
 using namespace drogon;
 using namespace drogon::orm;
-using namespace drogon_model::MaaGameData::gamedata;
+using namespace drogon_model::MaaGameData;
 
 const std::string Skill::Cols::_skillId = "skillId";
 const std::string Skill::Cols::_iconId = "iconId";
@@ -19,12 +19,12 @@ const std::string Skill::Cols::_hidden = "hidden";
 const std::string Skill::Cols::_levels = "levels";
 const std::string Skill::primaryKeyName = "skillId";
 const bool Skill::hasPrimaryKey = true;
-const std::string Skill::tableName = "gamedata.skill";
+const std::string Skill::tableName = "skill";
 
 const std::vector<typename Skill::MetaData> Skill::metaData_={
-{"skillId","std::string","character varying",0,0,1,1},
-{"iconId","std::string","character varying",0,0,0,0},
-{"hidden","bool","boolean",1,0,0,0},
+{"skillId","std::string","varchar(255)",255,0,1,1},
+{"iconId","std::string","varchar(255)",255,0,0,0},
+{"hidden","int8_t","tinyint(1)",1,0,0,0},
 {"levels","std::string","json",0,0,0,0}
 };
 const std::string &Skill::getColumnName(size_t index) noexcept(false)
@@ -46,7 +46,7 @@ Skill::Skill(const Row &r, const ssize_t indexOffset) noexcept
         }
         if(!r["hidden"].isNull())
         {
-            hidden_=std::make_shared<bool>(r["hidden"].as<bool>());
+            hidden_=std::make_shared<int8_t>(r["hidden"].as<int8_t>());
         }
         if(!r["levels"].isNull())
         {
@@ -75,7 +75,7 @@ Skill::Skill(const Row &r, const ssize_t indexOffset) noexcept
         index = offset + 2;
         if(!r[index].isNull())
         {
-            hidden_=std::make_shared<bool>(r[index].as<bool>());
+            hidden_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 3;
         if(!r[index].isNull())
@@ -114,7 +114,7 @@ Skill::Skill(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[2] = true;
         if(!pJson[pMasqueradingVector[2]].isNull())
         {
-            hidden_=std::make_shared<bool>(pJson[pMasqueradingVector[2]].asBool());
+            hidden_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[2]].asInt64());
         }
     }
     if(!pMasqueradingVector[3].empty() && pJson.isMember(pMasqueradingVector[3]))
@@ -150,7 +150,7 @@ Skill::Skill(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[2]=true;
         if(!pJson["hidden"].isNull())
         {
-            hidden_=std::make_shared<bool>(pJson["hidden"].asBool());
+            hidden_=std::make_shared<int8_t>((int8_t)pJson["hidden"].asInt64());
         }
     }
     if(pJson.isMember("levels"))
@@ -191,7 +191,7 @@ void Skill::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[2] = true;
         if(!pJson[pMasqueradingVector[2]].isNull())
         {
-            hidden_=std::make_shared<bool>(pJson[pMasqueradingVector[2]].asBool());
+            hidden_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[2]].asInt64());
         }
     }
     if(!pMasqueradingVector[3].empty() && pJson.isMember(pMasqueradingVector[3]))
@@ -226,7 +226,7 @@ void Skill::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[2] = true;
         if(!pJson["hidden"].isNull())
         {
-            hidden_=std::make_shared<bool>(pJson["hidden"].asBool());
+            hidden_=std::make_shared<int8_t>((int8_t)pJson["hidden"].asInt64());
         }
     }
     if(pJson.isMember("levels"))
@@ -293,20 +293,20 @@ void Skill::setIconidToNull() noexcept
     dirtyFlag_[1] = true;
 }
 
-const bool &Skill::getValueOfHidden() const noexcept
+const int8_t &Skill::getValueOfHidden() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(hidden_)
         return *hidden_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Skill::getHidden() const noexcept
+const std::shared_ptr<int8_t> &Skill::getHidden() const noexcept
 {
     return hidden_;
 }
-void Skill::setHidden(const bool &pHidden) noexcept
+void Skill::setHidden(const int8_t &pHidden) noexcept
 {
-    hidden_ = std::make_shared<bool>(pHidden);
+    hidden_ = std::make_shared<int8_t>(pHidden);
     dirtyFlag_[2] = true;
 }
 void Skill::setHiddenToNull() noexcept
@@ -775,6 +775,15 @@ bool Skill::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 1:
             if(pJson.isNull())
@@ -786,13 +795,22 @@ bool Skill::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 2:
             if(pJson.isNull())
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;

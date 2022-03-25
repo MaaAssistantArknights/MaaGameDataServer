@@ -36,8 +36,6 @@ namespace drogon_model
 {
 namespace MaaGameData
 {
-namespace gamedata
-{
 
 class Activity
 {
@@ -149,43 +147,46 @@ class Activity
 
     /**  For column startTime  */
     ///Get the value of the column startTime, returns the default value if the column is null
-    const ::trantor::Date &getValueOfStarttime() const noexcept;
+    const int64_t &getValueOfStarttime() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<::trantor::Date> &getStarttime() const noexcept;
+    const std::shared_ptr<int64_t> &getStarttime() const noexcept;
     ///Set the value of the column startTime
-    void setStarttime(const ::trantor::Date &pStarttime) noexcept;
+    void setStarttime(const int64_t &pStarttime) noexcept;
+    void setStarttimeToNull() noexcept;
 
     /**  For column endTime  */
     ///Get the value of the column endTime, returns the default value if the column is null
-    const ::trantor::Date &getValueOfEndtime() const noexcept;
+    const int64_t &getValueOfEndtime() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<::trantor::Date> &getEndtime() const noexcept;
+    const std::shared_ptr<int64_t> &getEndtime() const noexcept;
     ///Set the value of the column endTime
-    void setEndtime(const ::trantor::Date &pEndtime) noexcept;
+    void setEndtime(const int64_t &pEndtime) noexcept;
+    void setEndtimeToNull() noexcept;
 
     /**  For column rewardEndTime  */
     ///Get the value of the column rewardEndTime, returns the default value if the column is null
-    const ::trantor::Date &getValueOfRewardendtime() const noexcept;
+    const int64_t &getValueOfRewardendtime() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<::trantor::Date> &getRewardendtime() const noexcept;
+    const std::shared_ptr<int64_t> &getRewardendtime() const noexcept;
     ///Set the value of the column rewardEndTime
-    void setRewardendtime(const ::trantor::Date &pRewardendtime) noexcept;
+    void setRewardendtime(const int64_t &pRewardendtime) noexcept;
+    void setRewardendtimeToNull() noexcept;
 
     /**  For column displayOnHome  */
     ///Get the value of the column displayOnHome, returns the default value if the column is null
-    const bool &getValueOfDisplayonhome() const noexcept;
+    const int8_t &getValueOfDisplayonhome() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getDisplayonhome() const noexcept;
+    const std::shared_ptr<int8_t> &getDisplayonhome() const noexcept;
     ///Set the value of the column displayOnHome
-    void setDisplayonhome(const bool &pDisplayonhome) noexcept;
+    void setDisplayonhome(const int8_t &pDisplayonhome) noexcept;
 
     /**  For column hasStage  */
     ///Get the value of the column hasStage, returns the default value if the column is null
-    const bool &getValueOfHasstage() const noexcept;
+    const int8_t &getValueOfHasstage() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getHasstage() const noexcept;
+    const std::shared_ptr<int8_t> &getHasstage() const noexcept;
     ///Set the value of the column hasStage
-    void setHasstage(const bool &pHasstage) noexcept;
+    void setHasstage(const int8_t &pHasstage) noexcept;
 
     /**  For column actTopBarColor  */
     ///Get the value of the column actTopBarColor, returns the default value if the column is null
@@ -229,11 +230,11 @@ class Activity
 
     /**  For column isReplicate  */
     ///Get the value of the column isReplicate, returns the default value if the column is null
-    const bool &getValueOfIsreplicate() const noexcept;
+    const int8_t &getValueOfIsreplicate() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getIsreplicate() const noexcept;
+    const std::shared_ptr<int8_t> &getIsreplicate() const noexcept;
     ///Set the value of the column isReplicate
-    void setIsreplicate(const bool &pIsreplicate) noexcept;
+    void setIsreplicate(const int8_t &pIsreplicate) noexcept;
 
     /**  For column ungroupedMedalIds  */
     ///Get the value of the column ungroupedMedalIds, returns the default value if the column is null
@@ -267,16 +268,16 @@ class Activity
     std::shared_ptr<std::string> type_;
     std::shared_ptr<std::string> displaytype_;
     std::shared_ptr<std::string> name_;
-    std::shared_ptr<::trantor::Date> starttime_;
-    std::shared_ptr<::trantor::Date> endtime_;
-    std::shared_ptr<::trantor::Date> rewardendtime_;
-    std::shared_ptr<bool> displayonhome_;
-    std::shared_ptr<bool> hasstage_;
+    std::shared_ptr<int64_t> starttime_;
+    std::shared_ptr<int64_t> endtime_;
+    std::shared_ptr<int64_t> rewardendtime_;
+    std::shared_ptr<int8_t> displayonhome_;
+    std::shared_ptr<int8_t> hasstage_;
     std::shared_ptr<std::string> acttopbarcolor_;
     std::shared_ptr<std::string> acttopbartext_;
     std::shared_ptr<std::string> templateshopid_;
     std::shared_ptr<std::string> medalgroupid_;
-    std::shared_ptr<bool> isreplicate_;
+    std::shared_ptr<int8_t> isreplicate_;
     std::shared_ptr<std::string> ungroupedmedalids_;
     struct MetaData
     {
@@ -293,13 +294,13 @@ class Activity
   public:
     static const std::string &sqlForFindingByPrimaryKey()
     {
-        static const std::string sql="select * from " + tableName + " where id = $1";
+        static const std::string sql="select * from " + tableName + " where id = ?";
         return sql;
     }
 
     static const std::string &sqlForDeletingByPrimaryKey()
     {
-        static const std::string sql="delete from " + tableName + " where id = $1";
+        static const std::string sql="delete from " + tableName + " where id = ?";
         return sql;
     }
     std::string sqlForInserting(bool &needSelection) const
@@ -390,100 +391,89 @@ class Activity
         else
             sql += ") values (";
 
-        int placeholder=1;
-        char placeholderStr[64];
-        size_t n=0;
         if(dirtyFlag_[0])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[1])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[2])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[3])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[4])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[5])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[6])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[7])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[8])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[9])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[10])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[11])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[12])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[13])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[14])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(parametersCount > 0)
         {
             sql.resize(sql.length() - 1);
         }
-        if(needSelection)
-        {
-            sql.append(") returning *");
-        }
-        else
-        {
-            sql.append(1, ')');
-        }
+        sql.append(1, ')');
         LOG_TRACE << sql;
         return sql;
     }
 };
-} // namespace gamedata
 } // namespace MaaGameData
 } // namespace drogon_model

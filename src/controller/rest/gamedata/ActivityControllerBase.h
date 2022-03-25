@@ -13,7 +13,7 @@
 #include "Activity.h"
 using namespace drogon;
 using namespace drogon::orm;
-using namespace drogon_model::MaaGameData::gamedata;
+using namespace drogon_model::MaaGameData;
 /**
  * @brief this class is created by the drogon_ctl command.
  * this class is a restful API controller for reading and writing the activity table.

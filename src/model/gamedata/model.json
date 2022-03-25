@@ -1,20 +1,20 @@
 {
   //rdbms: server type, postgresql,mysql or sqlite3
-  "rdbms": "postgresql",
+  "rdbms": "mysql",
   //filename: sqlite3 db file name
   //"filename":"",
   //host: server address,localhost by default;
   "host": "127.0.0.1",
   //port: server port, 5432 by default;
-  "port": 5432,
+  "port": 3306,
   //dbname: Database name;
   "dbname": "MaaGameData",
   //schema: valid for postgreSQL, "public" by default;
-  "schema": "gamedata",
+  // "schema": "public",
   //user: User name
-  "user": "_chingc",
+  "user": "root",
   //password or passwd: Password
-  // "password": "",
+  "password": "local.ChingC@7",
   //client_encoding: The character set used by drogon_ctl. it is empty string by default which
   //means use the default character set.
   //"client_encoding": "utf-8",

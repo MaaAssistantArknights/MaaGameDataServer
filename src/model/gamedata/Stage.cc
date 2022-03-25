@@ -11,7 +11,7 @@
 
 using namespace drogon;
 using namespace drogon::orm;
-using namespace drogon_model::MaaGameData::gamedata;
+using namespace drogon_model::MaaGameData;
 
 const std::string Stage::Cols::_stageId = "stageId";
 const std::string Stage::Cols::_stageType = "stageType";
@@ -59,53 +59,53 @@ const std::string Stage::Cols::_isStagePatch = "isStagePatch";
 const std::string Stage::Cols::_mainStageId = "mainStageId";
 const std::string Stage::primaryKeyName = "stageId";
 const bool Stage::hasPrimaryKey = true;
-const std::string Stage::tableName = "gamedata.stage";
+const std::string Stage::tableName = "stage";
 
 const std::vector<typename Stage::MetaData> Stage::metaData_={
-{"stageId","std::string","character varying",0,0,1,1},
-{"stageType","std::string","character varying",255,0,0,0},
-{"difficulty","std::string","character varying",255,0,0,0},
-{"performanceStageFlag","std::string","character varying",255,0,0,0},
+{"stageId","std::string","varchar(255)",255,0,1,1},
+{"stageType","std::string","varchar(255)",255,0,0,0},
+{"difficulty","std::string","varchar(255)",255,0,0,0},
+{"performanceStageFlag","std::string","varchar(255)",255,0,0,0},
 {"unlockCondition","std::string","json",0,0,0,0},
-{"levelId","std::string","character varying",0,0,0,0},
-{"zoneId","std::string","character varying",0,0,0,0},
-{"code","std::string","character varying",255,0,0,0},
-{"name","std::string","character varying",255,0,0,0},
-{"description","std::string","character varying",255,0,0,0},
-{"hardStageId","std::string","character varying",0,0,0,0},
-{"dangerLevel","std::string","character varying",255,0,0,0},
-{"dangerPoint","std::string","numeric",0,0,0,0},
-{"loadingPicId","std::string","character varying",0,0,0,0},
-{"canPractice","bool","boolean",1,0,0,0},
-{"canBattleReplay","bool","boolean",1,0,0,0},
-{"apCost","int32_t","integer",4,0,0,0},
-{"apFailReturn","int32_t","integer",4,0,0,0},
-{"etItemId","std::string","character varying",0,0,0,0},
-{"etCost","int32_t","integer",4,0,0,0},
-{"etFailReturn","int32_t","integer",4,0,0,0},
-{"etButtonStyle","std::string","character varying",255,0,0,0},
-{"apProtectTimes","int32_t","integer",4,0,0,0},
-{"diamondOnceDrop","int32_t","integer",4,0,0,0},
-{"practiceTicketCost","int32_t","integer",4,0,0,0},
-{"dailyStageDifficulty","int32_t","integer",4,0,0,0},
-{"expGain","int32_t","integer",4,0,0,0},
-{"goldGain","int32_t","integer",4,0,0,0},
-{"loseExpGain","int32_t","integer",4,0,0,0},
-{"loseGoldGain","int32_t","integer",4,0,0,0},
-{"passFavor","int32_t","integer",4,0,0,0},
-{"completeFavor","int32_t","integer",4,0,0,0},
-{"slProgress","int32_t","integer",4,0,0,0},
-{"displayMainItem","std::string","character varying",255,0,0,0},
-{"hilightMark","bool","boolean",1,0,0,0},
-{"bossMark","bool","boolean",1,0,0,0},
-{"isPredefined","bool","boolean",1,0,0,0},
-{"isHardPredefined","bool","boolean",1,0,0,0},
-{"isSkillSelectablePredefined","bool","boolean",1,0,0,0},
-{"isStoryOnly","bool","boolean",1,0,0,0},
-{"appearanceStyle","int32_t","integer",4,0,0,0},
-{"startButtonOverrideId","std::string","character varying",0,0,0,0},
-{"isStagePatch","bool","boolean",1,0,0,0},
-{"mainStageId","std::string","character varying",0,0,0,0}
+{"levelId","std::string","varchar(255)",255,0,0,0},
+{"zoneId","std::string","varchar(255)",255,0,0,0},
+{"code","std::string","varchar(255)",255,0,0,0},
+{"name","std::string","varchar(255)",255,0,0,0},
+{"description","std::string","varchar(255)",255,0,0,0},
+{"hardStageId","std::string","varchar(255)",255,0,0,0},
+{"dangerLevel","std::string","varchar(255)",255,0,0,0},
+{"dangerPoint","std::string","decimal(10,0)",0,0,0,0},
+{"loadingPicId","std::string","varchar(255)",255,0,0,0},
+{"canPractice","int8_t","tinyint(1)",1,0,0,0},
+{"canBattleReplay","int8_t","tinyint(1)",1,0,0,0},
+{"apCost","int32_t","int",4,0,0,0},
+{"apFailReturn","int32_t","int",4,0,0,0},
+{"etItemId","std::string","varchar(255)",255,0,0,0},
+{"etCost","int32_t","int",4,0,0,0},
+{"etFailReturn","int32_t","int",4,0,0,0},
+{"etButtonStyle","std::string","varchar(255)",255,0,0,0},
+{"apProtectTimes","int32_t","int",4,0,0,0},
+{"diamondOnceDrop","int32_t","int",4,0,0,0},
+{"practiceTicketCost","int32_t","int",4,0,0,0},
+{"dailyStageDifficulty","int32_t","int",4,0,0,0},
+{"expGain","int32_t","int",4,0,0,0},
+{"goldGain","int32_t","int",4,0,0,0},
+{"loseExpGain","int32_t","int",4,0,0,0},
+{"loseGoldGain","int32_t","int",4,0,0,0},
+{"passFavor","int32_t","int",4,0,0,0},
+{"completeFavor","int32_t","int",4,0,0,0},
+{"slProgress","int32_t","int",4,0,0,0},
+{"displayMainItem","std::string","varchar(255)",255,0,0,0},
+{"hilightMark","int8_t","tinyint(1)",1,0,0,0},
+{"bossMark","int8_t","tinyint(1)",1,0,0,0},
+{"isPredefined","int8_t","tinyint(1)",1,0,0,0},
+{"isHardPredefined","int8_t","tinyint(1)",1,0,0,0},
+{"isSkillSelectablePredefined","int8_t","tinyint(1)",1,0,0,0},
+{"isStoryOnly","int8_t","tinyint(1)",1,0,0,0},
+{"appearanceStyle","int32_t","int",4,0,0,0},
+{"startButtonOverrideId","std::string","varchar(255)",255,0,0,0},
+{"isStagePatch","int8_t","tinyint(1)",1,0,0,0},
+{"mainStageId","std::string","varchar(255)",255,0,0,0}
 };
 const std::string &Stage::getColumnName(size_t index) noexcept(false)
 {
@@ -174,11 +174,11 @@ Stage::Stage(const Row &r, const ssize_t indexOffset) noexcept
         }
         if(!r["canPractice"].isNull())
         {
-            canpractice_=std::make_shared<bool>(r["canPractice"].as<bool>());
+            canpractice_=std::make_shared<int8_t>(r["canPractice"].as<int8_t>());
         }
         if(!r["canBattleReplay"].isNull())
         {
-            canbattlereplay_=std::make_shared<bool>(r["canBattleReplay"].as<bool>());
+            canbattlereplay_=std::make_shared<int8_t>(r["canBattleReplay"].as<int8_t>());
         }
         if(!r["apCost"].isNull())
         {
@@ -254,27 +254,27 @@ Stage::Stage(const Row &r, const ssize_t indexOffset) noexcept
         }
         if(!r["hilightMark"].isNull())
         {
-            hilightmark_=std::make_shared<bool>(r["hilightMark"].as<bool>());
+            hilightmark_=std::make_shared<int8_t>(r["hilightMark"].as<int8_t>());
         }
         if(!r["bossMark"].isNull())
         {
-            bossmark_=std::make_shared<bool>(r["bossMark"].as<bool>());
+            bossmark_=std::make_shared<int8_t>(r["bossMark"].as<int8_t>());
         }
         if(!r["isPredefined"].isNull())
         {
-            ispredefined_=std::make_shared<bool>(r["isPredefined"].as<bool>());
+            ispredefined_=std::make_shared<int8_t>(r["isPredefined"].as<int8_t>());
         }
         if(!r["isHardPredefined"].isNull())
         {
-            ishardpredefined_=std::make_shared<bool>(r["isHardPredefined"].as<bool>());
+            ishardpredefined_=std::make_shared<int8_t>(r["isHardPredefined"].as<int8_t>());
         }
         if(!r["isSkillSelectablePredefined"].isNull())
         {
-            isskillselectablepredefined_=std::make_shared<bool>(r["isSkillSelectablePredefined"].as<bool>());
+            isskillselectablepredefined_=std::make_shared<int8_t>(r["isSkillSelectablePredefined"].as<int8_t>());
         }
         if(!r["isStoryOnly"].isNull())
         {
-            isstoryonly_=std::make_shared<bool>(r["isStoryOnly"].as<bool>());
+            isstoryonly_=std::make_shared<int8_t>(r["isStoryOnly"].as<int8_t>());
         }
         if(!r["appearanceStyle"].isNull())
         {
@@ -286,7 +286,7 @@ Stage::Stage(const Row &r, const ssize_t indexOffset) noexcept
         }
         if(!r["isStagePatch"].isNull())
         {
-            isstagepatch_=std::make_shared<bool>(r["isStagePatch"].as<bool>());
+            isstagepatch_=std::make_shared<int8_t>(r["isStagePatch"].as<int8_t>());
         }
         if(!r["mainStageId"].isNull())
         {
@@ -375,12 +375,12 @@ Stage::Stage(const Row &r, const ssize_t indexOffset) noexcept
         index = offset + 14;
         if(!r[index].isNull())
         {
-            canpractice_=std::make_shared<bool>(r[index].as<bool>());
+            canpractice_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 15;
         if(!r[index].isNull())
         {
-            canbattlereplay_=std::make_shared<bool>(r[index].as<bool>());
+            canbattlereplay_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 16;
         if(!r[index].isNull())
@@ -475,32 +475,32 @@ Stage::Stage(const Row &r, const ssize_t indexOffset) noexcept
         index = offset + 34;
         if(!r[index].isNull())
         {
-            hilightmark_=std::make_shared<bool>(r[index].as<bool>());
+            hilightmark_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 35;
         if(!r[index].isNull())
         {
-            bossmark_=std::make_shared<bool>(r[index].as<bool>());
+            bossmark_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 36;
         if(!r[index].isNull())
         {
-            ispredefined_=std::make_shared<bool>(r[index].as<bool>());
+            ispredefined_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 37;
         if(!r[index].isNull())
         {
-            ishardpredefined_=std::make_shared<bool>(r[index].as<bool>());
+            ishardpredefined_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 38;
         if(!r[index].isNull())
         {
-            isskillselectablepredefined_=std::make_shared<bool>(r[index].as<bool>());
+            isskillselectablepredefined_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 39;
         if(!r[index].isNull())
         {
-            isstoryonly_=std::make_shared<bool>(r[index].as<bool>());
+            isstoryonly_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 40;
         if(!r[index].isNull())
@@ -515,7 +515,7 @@ Stage::Stage(const Row &r, const ssize_t indexOffset) noexcept
         index = offset + 42;
         if(!r[index].isNull())
         {
-            isstagepatch_=std::make_shared<bool>(r[index].as<bool>());
+            isstagepatch_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 43;
         if(!r[index].isNull())
@@ -650,7 +650,7 @@ Stage::Stage(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[14] = true;
         if(!pJson[pMasqueradingVector[14]].isNull())
         {
-            canpractice_=std::make_shared<bool>(pJson[pMasqueradingVector[14]].asBool());
+            canpractice_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[14]].asInt64());
         }
     }
     if(!pMasqueradingVector[15].empty() && pJson.isMember(pMasqueradingVector[15]))
@@ -658,7 +658,7 @@ Stage::Stage(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[15] = true;
         if(!pJson[pMasqueradingVector[15]].isNull())
         {
-            canbattlereplay_=std::make_shared<bool>(pJson[pMasqueradingVector[15]].asBool());
+            canbattlereplay_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[15]].asInt64());
         }
     }
     if(!pMasqueradingVector[16].empty() && pJson.isMember(pMasqueradingVector[16]))
@@ -810,7 +810,7 @@ Stage::Stage(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[34] = true;
         if(!pJson[pMasqueradingVector[34]].isNull())
         {
-            hilightmark_=std::make_shared<bool>(pJson[pMasqueradingVector[34]].asBool());
+            hilightmark_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[34]].asInt64());
         }
     }
     if(!pMasqueradingVector[35].empty() && pJson.isMember(pMasqueradingVector[35]))
@@ -818,7 +818,7 @@ Stage::Stage(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[35] = true;
         if(!pJson[pMasqueradingVector[35]].isNull())
         {
-            bossmark_=std::make_shared<bool>(pJson[pMasqueradingVector[35]].asBool());
+            bossmark_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[35]].asInt64());
         }
     }
     if(!pMasqueradingVector[36].empty() && pJson.isMember(pMasqueradingVector[36]))
@@ -826,7 +826,7 @@ Stage::Stage(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[36] = true;
         if(!pJson[pMasqueradingVector[36]].isNull())
         {
-            ispredefined_=std::make_shared<bool>(pJson[pMasqueradingVector[36]].asBool());
+            ispredefined_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[36]].asInt64());
         }
     }
     if(!pMasqueradingVector[37].empty() && pJson.isMember(pMasqueradingVector[37]))
@@ -834,7 +834,7 @@ Stage::Stage(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[37] = true;
         if(!pJson[pMasqueradingVector[37]].isNull())
         {
-            ishardpredefined_=std::make_shared<bool>(pJson[pMasqueradingVector[37]].asBool());
+            ishardpredefined_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[37]].asInt64());
         }
     }
     if(!pMasqueradingVector[38].empty() && pJson.isMember(pMasqueradingVector[38]))
@@ -842,7 +842,7 @@ Stage::Stage(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[38] = true;
         if(!pJson[pMasqueradingVector[38]].isNull())
         {
-            isskillselectablepredefined_=std::make_shared<bool>(pJson[pMasqueradingVector[38]].asBool());
+            isskillselectablepredefined_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[38]].asInt64());
         }
     }
     if(!pMasqueradingVector[39].empty() && pJson.isMember(pMasqueradingVector[39]))
@@ -850,7 +850,7 @@ Stage::Stage(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[39] = true;
         if(!pJson[pMasqueradingVector[39]].isNull())
         {
-            isstoryonly_=std::make_shared<bool>(pJson[pMasqueradingVector[39]].asBool());
+            isstoryonly_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[39]].asInt64());
         }
     }
     if(!pMasqueradingVector[40].empty() && pJson.isMember(pMasqueradingVector[40]))
@@ -874,7 +874,7 @@ Stage::Stage(const Json::Value &pJson, const std::vector<std::string> &pMasquera
         dirtyFlag_[42] = true;
         if(!pJson[pMasqueradingVector[42]].isNull())
         {
-            isstagepatch_=std::make_shared<bool>(pJson[pMasqueradingVector[42]].asBool());
+            isstagepatch_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[42]].asInt64());
         }
     }
     if(!pMasqueradingVector[43].empty() && pJson.isMember(pMasqueradingVector[43]))
@@ -1006,7 +1006,7 @@ Stage::Stage(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[14]=true;
         if(!pJson["canPractice"].isNull())
         {
-            canpractice_=std::make_shared<bool>(pJson["canPractice"].asBool());
+            canpractice_=std::make_shared<int8_t>((int8_t)pJson["canPractice"].asInt64());
         }
     }
     if(pJson.isMember("canBattleReplay"))
@@ -1014,7 +1014,7 @@ Stage::Stage(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[15]=true;
         if(!pJson["canBattleReplay"].isNull())
         {
-            canbattlereplay_=std::make_shared<bool>(pJson["canBattleReplay"].asBool());
+            canbattlereplay_=std::make_shared<int8_t>((int8_t)pJson["canBattleReplay"].asInt64());
         }
     }
     if(pJson.isMember("apCost"))
@@ -1166,7 +1166,7 @@ Stage::Stage(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[34]=true;
         if(!pJson["hilightMark"].isNull())
         {
-            hilightmark_=std::make_shared<bool>(pJson["hilightMark"].asBool());
+            hilightmark_=std::make_shared<int8_t>((int8_t)pJson["hilightMark"].asInt64());
         }
     }
     if(pJson.isMember("bossMark"))
@@ -1174,7 +1174,7 @@ Stage::Stage(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[35]=true;
         if(!pJson["bossMark"].isNull())
         {
-            bossmark_=std::make_shared<bool>(pJson["bossMark"].asBool());
+            bossmark_=std::make_shared<int8_t>((int8_t)pJson["bossMark"].asInt64());
         }
     }
     if(pJson.isMember("isPredefined"))
@@ -1182,7 +1182,7 @@ Stage::Stage(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[36]=true;
         if(!pJson["isPredefined"].isNull())
         {
-            ispredefined_=std::make_shared<bool>(pJson["isPredefined"].asBool());
+            ispredefined_=std::make_shared<int8_t>((int8_t)pJson["isPredefined"].asInt64());
         }
     }
     if(pJson.isMember("isHardPredefined"))
@@ -1190,7 +1190,7 @@ Stage::Stage(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[37]=true;
         if(!pJson["isHardPredefined"].isNull())
         {
-            ishardpredefined_=std::make_shared<bool>(pJson["isHardPredefined"].asBool());
+            ishardpredefined_=std::make_shared<int8_t>((int8_t)pJson["isHardPredefined"].asInt64());
         }
     }
     if(pJson.isMember("isSkillSelectablePredefined"))
@@ -1198,7 +1198,7 @@ Stage::Stage(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[38]=true;
         if(!pJson["isSkillSelectablePredefined"].isNull())
         {
-            isskillselectablepredefined_=std::make_shared<bool>(pJson["isSkillSelectablePredefined"].asBool());
+            isskillselectablepredefined_=std::make_shared<int8_t>((int8_t)pJson["isSkillSelectablePredefined"].asInt64());
         }
     }
     if(pJson.isMember("isStoryOnly"))
@@ -1206,7 +1206,7 @@ Stage::Stage(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[39]=true;
         if(!pJson["isStoryOnly"].isNull())
         {
-            isstoryonly_=std::make_shared<bool>(pJson["isStoryOnly"].asBool());
+            isstoryonly_=std::make_shared<int8_t>((int8_t)pJson["isStoryOnly"].asInt64());
         }
     }
     if(pJson.isMember("appearanceStyle"))
@@ -1230,7 +1230,7 @@ Stage::Stage(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[42]=true;
         if(!pJson["isStagePatch"].isNull())
         {
-            isstagepatch_=std::make_shared<bool>(pJson["isStagePatch"].asBool());
+            isstagepatch_=std::make_shared<int8_t>((int8_t)pJson["isStagePatch"].asInt64());
         }
     }
     if(pJson.isMember("mainStageId"))
@@ -1367,7 +1367,7 @@ void Stage::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[14] = true;
         if(!pJson[pMasqueradingVector[14]].isNull())
         {
-            canpractice_=std::make_shared<bool>(pJson[pMasqueradingVector[14]].asBool());
+            canpractice_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[14]].asInt64());
         }
     }
     if(!pMasqueradingVector[15].empty() && pJson.isMember(pMasqueradingVector[15]))
@@ -1375,7 +1375,7 @@ void Stage::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[15] = true;
         if(!pJson[pMasqueradingVector[15]].isNull())
         {
-            canbattlereplay_=std::make_shared<bool>(pJson[pMasqueradingVector[15]].asBool());
+            canbattlereplay_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[15]].asInt64());
         }
     }
     if(!pMasqueradingVector[16].empty() && pJson.isMember(pMasqueradingVector[16]))
@@ -1527,7 +1527,7 @@ void Stage::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[34] = true;
         if(!pJson[pMasqueradingVector[34]].isNull())
         {
-            hilightmark_=std::make_shared<bool>(pJson[pMasqueradingVector[34]].asBool());
+            hilightmark_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[34]].asInt64());
         }
     }
     if(!pMasqueradingVector[35].empty() && pJson.isMember(pMasqueradingVector[35]))
@@ -1535,7 +1535,7 @@ void Stage::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[35] = true;
         if(!pJson[pMasqueradingVector[35]].isNull())
         {
-            bossmark_=std::make_shared<bool>(pJson[pMasqueradingVector[35]].asBool());
+            bossmark_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[35]].asInt64());
         }
     }
     if(!pMasqueradingVector[36].empty() && pJson.isMember(pMasqueradingVector[36]))
@@ -1543,7 +1543,7 @@ void Stage::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[36] = true;
         if(!pJson[pMasqueradingVector[36]].isNull())
         {
-            ispredefined_=std::make_shared<bool>(pJson[pMasqueradingVector[36]].asBool());
+            ispredefined_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[36]].asInt64());
         }
     }
     if(!pMasqueradingVector[37].empty() && pJson.isMember(pMasqueradingVector[37]))
@@ -1551,7 +1551,7 @@ void Stage::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[37] = true;
         if(!pJson[pMasqueradingVector[37]].isNull())
         {
-            ishardpredefined_=std::make_shared<bool>(pJson[pMasqueradingVector[37]].asBool());
+            ishardpredefined_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[37]].asInt64());
         }
     }
     if(!pMasqueradingVector[38].empty() && pJson.isMember(pMasqueradingVector[38]))
@@ -1559,7 +1559,7 @@ void Stage::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[38] = true;
         if(!pJson[pMasqueradingVector[38]].isNull())
         {
-            isskillselectablepredefined_=std::make_shared<bool>(pJson[pMasqueradingVector[38]].asBool());
+            isskillselectablepredefined_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[38]].asInt64());
         }
     }
     if(!pMasqueradingVector[39].empty() && pJson.isMember(pMasqueradingVector[39]))
@@ -1567,7 +1567,7 @@ void Stage::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[39] = true;
         if(!pJson[pMasqueradingVector[39]].isNull())
         {
-            isstoryonly_=std::make_shared<bool>(pJson[pMasqueradingVector[39]].asBool());
+            isstoryonly_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[39]].asInt64());
         }
     }
     if(!pMasqueradingVector[40].empty() && pJson.isMember(pMasqueradingVector[40]))
@@ -1591,7 +1591,7 @@ void Stage::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[42] = true;
         if(!pJson[pMasqueradingVector[42]].isNull())
         {
-            isstagepatch_=std::make_shared<bool>(pJson[pMasqueradingVector[42]].asBool());
+            isstagepatch_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[42]].asInt64());
         }
     }
     if(!pMasqueradingVector[43].empty() && pJson.isMember(pMasqueradingVector[43]))
@@ -1722,7 +1722,7 @@ void Stage::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[14] = true;
         if(!pJson["canPractice"].isNull())
         {
-            canpractice_=std::make_shared<bool>(pJson["canPractice"].asBool());
+            canpractice_=std::make_shared<int8_t>((int8_t)pJson["canPractice"].asInt64());
         }
     }
     if(pJson.isMember("canBattleReplay"))
@@ -1730,7 +1730,7 @@ void Stage::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[15] = true;
         if(!pJson["canBattleReplay"].isNull())
         {
-            canbattlereplay_=std::make_shared<bool>(pJson["canBattleReplay"].asBool());
+            canbattlereplay_=std::make_shared<int8_t>((int8_t)pJson["canBattleReplay"].asInt64());
         }
     }
     if(pJson.isMember("apCost"))
@@ -1882,7 +1882,7 @@ void Stage::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[34] = true;
         if(!pJson["hilightMark"].isNull())
         {
-            hilightmark_=std::make_shared<bool>(pJson["hilightMark"].asBool());
+            hilightmark_=std::make_shared<int8_t>((int8_t)pJson["hilightMark"].asInt64());
         }
     }
     if(pJson.isMember("bossMark"))
@@ -1890,7 +1890,7 @@ void Stage::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[35] = true;
         if(!pJson["bossMark"].isNull())
         {
-            bossmark_=std::make_shared<bool>(pJson["bossMark"].asBool());
+            bossmark_=std::make_shared<int8_t>((int8_t)pJson["bossMark"].asInt64());
         }
     }
     if(pJson.isMember("isPredefined"))
@@ -1898,7 +1898,7 @@ void Stage::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[36] = true;
         if(!pJson["isPredefined"].isNull())
         {
-            ispredefined_=std::make_shared<bool>(pJson["isPredefined"].asBool());
+            ispredefined_=std::make_shared<int8_t>((int8_t)pJson["isPredefined"].asInt64());
         }
     }
     if(pJson.isMember("isHardPredefined"))
@@ -1906,7 +1906,7 @@ void Stage::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[37] = true;
         if(!pJson["isHardPredefined"].isNull())
         {
-            ishardpredefined_=std::make_shared<bool>(pJson["isHardPredefined"].asBool());
+            ishardpredefined_=std::make_shared<int8_t>((int8_t)pJson["isHardPredefined"].asInt64());
         }
     }
     if(pJson.isMember("isSkillSelectablePredefined"))
@@ -1914,7 +1914,7 @@ void Stage::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[38] = true;
         if(!pJson["isSkillSelectablePredefined"].isNull())
         {
-            isskillselectablepredefined_=std::make_shared<bool>(pJson["isSkillSelectablePredefined"].asBool());
+            isskillselectablepredefined_=std::make_shared<int8_t>((int8_t)pJson["isSkillSelectablePredefined"].asInt64());
         }
     }
     if(pJson.isMember("isStoryOnly"))
@@ -1922,7 +1922,7 @@ void Stage::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[39] = true;
         if(!pJson["isStoryOnly"].isNull())
         {
-            isstoryonly_=std::make_shared<bool>(pJson["isStoryOnly"].asBool());
+            isstoryonly_=std::make_shared<int8_t>((int8_t)pJson["isStoryOnly"].asInt64());
         }
     }
     if(pJson.isMember("appearanceStyle"))
@@ -1946,7 +1946,7 @@ void Stage::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[42] = true;
         if(!pJson["isStagePatch"].isNull())
         {
-            isstagepatch_=std::make_shared<bool>(pJson["isStagePatch"].asBool());
+            isstagepatch_=std::make_shared<int8_t>((int8_t)pJson["isStagePatch"].asInt64());
         }
     }
     if(pJson.isMember("mainStageId"))
@@ -2337,20 +2337,20 @@ void Stage::setLoadingpicidToNull() noexcept
     dirtyFlag_[13] = true;
 }
 
-const bool &Stage::getValueOfCanpractice() const noexcept
+const int8_t &Stage::getValueOfCanpractice() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(canpractice_)
         return *canpractice_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Stage::getCanpractice() const noexcept
+const std::shared_ptr<int8_t> &Stage::getCanpractice() const noexcept
 {
     return canpractice_;
 }
-void Stage::setCanpractice(const bool &pCanpractice) noexcept
+void Stage::setCanpractice(const int8_t &pCanpractice) noexcept
 {
-    canpractice_ = std::make_shared<bool>(pCanpractice);
+    canpractice_ = std::make_shared<int8_t>(pCanpractice);
     dirtyFlag_[14] = true;
 }
 void Stage::setCanpracticeToNull() noexcept
@@ -2359,20 +2359,20 @@ void Stage::setCanpracticeToNull() noexcept
     dirtyFlag_[14] = true;
 }
 
-const bool &Stage::getValueOfCanbattlereplay() const noexcept
+const int8_t &Stage::getValueOfCanbattlereplay() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(canbattlereplay_)
         return *canbattlereplay_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Stage::getCanbattlereplay() const noexcept
+const std::shared_ptr<int8_t> &Stage::getCanbattlereplay() const noexcept
 {
     return canbattlereplay_;
 }
-void Stage::setCanbattlereplay(const bool &pCanbattlereplay) noexcept
+void Stage::setCanbattlereplay(const int8_t &pCanbattlereplay) noexcept
 {
-    canbattlereplay_ = std::make_shared<bool>(pCanbattlereplay);
+    canbattlereplay_ = std::make_shared<int8_t>(pCanbattlereplay);
     dirtyFlag_[15] = true;
 }
 void Stage::setCanbattlereplayToNull() noexcept
@@ -2792,20 +2792,20 @@ void Stage::setDisplaymainitemToNull() noexcept
     dirtyFlag_[33] = true;
 }
 
-const bool &Stage::getValueOfHilightmark() const noexcept
+const int8_t &Stage::getValueOfHilightmark() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(hilightmark_)
         return *hilightmark_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Stage::getHilightmark() const noexcept
+const std::shared_ptr<int8_t> &Stage::getHilightmark() const noexcept
 {
     return hilightmark_;
 }
-void Stage::setHilightmark(const bool &pHilightmark) noexcept
+void Stage::setHilightmark(const int8_t &pHilightmark) noexcept
 {
-    hilightmark_ = std::make_shared<bool>(pHilightmark);
+    hilightmark_ = std::make_shared<int8_t>(pHilightmark);
     dirtyFlag_[34] = true;
 }
 void Stage::setHilightmarkToNull() noexcept
@@ -2814,20 +2814,20 @@ void Stage::setHilightmarkToNull() noexcept
     dirtyFlag_[34] = true;
 }
 
-const bool &Stage::getValueOfBossmark() const noexcept
+const int8_t &Stage::getValueOfBossmark() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(bossmark_)
         return *bossmark_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Stage::getBossmark() const noexcept
+const std::shared_ptr<int8_t> &Stage::getBossmark() const noexcept
 {
     return bossmark_;
 }
-void Stage::setBossmark(const bool &pBossmark) noexcept
+void Stage::setBossmark(const int8_t &pBossmark) noexcept
 {
-    bossmark_ = std::make_shared<bool>(pBossmark);
+    bossmark_ = std::make_shared<int8_t>(pBossmark);
     dirtyFlag_[35] = true;
 }
 void Stage::setBossmarkToNull() noexcept
@@ -2836,20 +2836,20 @@ void Stage::setBossmarkToNull() noexcept
     dirtyFlag_[35] = true;
 }
 
-const bool &Stage::getValueOfIspredefined() const noexcept
+const int8_t &Stage::getValueOfIspredefined() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(ispredefined_)
         return *ispredefined_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Stage::getIspredefined() const noexcept
+const std::shared_ptr<int8_t> &Stage::getIspredefined() const noexcept
 {
     return ispredefined_;
 }
-void Stage::setIspredefined(const bool &pIspredefined) noexcept
+void Stage::setIspredefined(const int8_t &pIspredefined) noexcept
 {
-    ispredefined_ = std::make_shared<bool>(pIspredefined);
+    ispredefined_ = std::make_shared<int8_t>(pIspredefined);
     dirtyFlag_[36] = true;
 }
 void Stage::setIspredefinedToNull() noexcept
@@ -2858,20 +2858,20 @@ void Stage::setIspredefinedToNull() noexcept
     dirtyFlag_[36] = true;
 }
 
-const bool &Stage::getValueOfIshardpredefined() const noexcept
+const int8_t &Stage::getValueOfIshardpredefined() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(ishardpredefined_)
         return *ishardpredefined_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Stage::getIshardpredefined() const noexcept
+const std::shared_ptr<int8_t> &Stage::getIshardpredefined() const noexcept
 {
     return ishardpredefined_;
 }
-void Stage::setIshardpredefined(const bool &pIshardpredefined) noexcept
+void Stage::setIshardpredefined(const int8_t &pIshardpredefined) noexcept
 {
-    ishardpredefined_ = std::make_shared<bool>(pIshardpredefined);
+    ishardpredefined_ = std::make_shared<int8_t>(pIshardpredefined);
     dirtyFlag_[37] = true;
 }
 void Stage::setIshardpredefinedToNull() noexcept
@@ -2880,20 +2880,20 @@ void Stage::setIshardpredefinedToNull() noexcept
     dirtyFlag_[37] = true;
 }
 
-const bool &Stage::getValueOfIsskillselectablepredefined() const noexcept
+const int8_t &Stage::getValueOfIsskillselectablepredefined() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(isskillselectablepredefined_)
         return *isskillselectablepredefined_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Stage::getIsskillselectablepredefined() const noexcept
+const std::shared_ptr<int8_t> &Stage::getIsskillselectablepredefined() const noexcept
 {
     return isskillselectablepredefined_;
 }
-void Stage::setIsskillselectablepredefined(const bool &pIsskillselectablepredefined) noexcept
+void Stage::setIsskillselectablepredefined(const int8_t &pIsskillselectablepredefined) noexcept
 {
-    isskillselectablepredefined_ = std::make_shared<bool>(pIsskillselectablepredefined);
+    isskillselectablepredefined_ = std::make_shared<int8_t>(pIsskillselectablepredefined);
     dirtyFlag_[38] = true;
 }
 void Stage::setIsskillselectablepredefinedToNull() noexcept
@@ -2902,20 +2902,20 @@ void Stage::setIsskillselectablepredefinedToNull() noexcept
     dirtyFlag_[38] = true;
 }
 
-const bool &Stage::getValueOfIsstoryonly() const noexcept
+const int8_t &Stage::getValueOfIsstoryonly() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(isstoryonly_)
         return *isstoryonly_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Stage::getIsstoryonly() const noexcept
+const std::shared_ptr<int8_t> &Stage::getIsstoryonly() const noexcept
 {
     return isstoryonly_;
 }
-void Stage::setIsstoryonly(const bool &pIsstoryonly) noexcept
+void Stage::setIsstoryonly(const int8_t &pIsstoryonly) noexcept
 {
-    isstoryonly_ = std::make_shared<bool>(pIsstoryonly);
+    isstoryonly_ = std::make_shared<int8_t>(pIsstoryonly);
     dirtyFlag_[39] = true;
 }
 void Stage::setIsstoryonlyToNull() noexcept
@@ -2973,20 +2973,20 @@ void Stage::setStartbuttonoverrideidToNull() noexcept
     dirtyFlag_[41] = true;
 }
 
-const bool &Stage::getValueOfIsstagepatch() const noexcept
+const int8_t &Stage::getValueOfIsstagepatch() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(isstagepatch_)
         return *isstagepatch_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Stage::getIsstagepatch() const noexcept
+const std::shared_ptr<int8_t> &Stage::getIsstagepatch() const noexcept
 {
     return isstagepatch_;
 }
-void Stage::setIsstagepatch(const bool &pIsstagepatch) noexcept
+void Stage::setIsstagepatch(const int8_t &pIsstagepatch) noexcept
 {
-    isstagepatch_ = std::make_shared<bool>(pIsstagepatch);
+    isstagepatch_ = std::make_shared<int8_t>(pIsstagepatch);
     dirtyFlag_[42] = true;
 }
 void Stage::setIsstagepatchToNull() noexcept
@@ -6535,6 +6535,15 @@ bool Stage::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 1:
             if(pJson.isNull())
@@ -6617,6 +6626,15 @@ bool Stage::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 6:
             if(pJson.isNull())
@@ -6628,6 +6646,15 @@ bool Stage::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 7:
             if(pJson.isNull())
@@ -6699,6 +6726,15 @@ bool Stage::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 11:
             if(pJson.isNull())
@@ -6741,13 +6777,22 @@ bool Stage::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 14:
             if(pJson.isNull())
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -6758,7 +6803,7 @@ bool Stage::validJsonOfField(size_t index,
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -6796,6 +6841,15 @@ bool Stage::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 19:
             if(pJson.isNull())
@@ -6985,7 +7039,7 @@ bool Stage::validJsonOfField(size_t index,
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -6996,7 +7050,7 @@ bool Stage::validJsonOfField(size_t index,
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -7007,7 +7061,7 @@ bool Stage::validJsonOfField(size_t index,
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -7018,7 +7072,7 @@ bool Stage::validJsonOfField(size_t index,
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -7029,7 +7083,7 @@ bool Stage::validJsonOfField(size_t index,
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -7040,7 +7094,7 @@ bool Stage::validJsonOfField(size_t index,
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -7067,13 +7121,22 @@ bool Stage::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         case 42:
             if(pJson.isNull())
             {
                 return true;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -7089,6 +7152,15 @@ bool Stage::validJsonOfField(size_t index,
                 err="Type error in the "+fieldName+" field";
                 return false;
             }
+            // asString().length() creates a string object, is there any better way to validate the length?
+            if(pJson.isString() && pJson.asString().length() > 255)
+            {
+                err="String length exceeds limit for the " +
+                    fieldName +
+                    " field (the maximum value is 255)";
+                return false;
+            }
+
             break;
         default:
             err="Internal error in the server";

@@ -8,7 +8,7 @@
 
 using namespace std::chrono_literals;
 using namespace drogon::orm;
-using namespace drogon_model::MaaGameData::gamedata;
+using namespace drogon_model::MaaGameData;
 
 void DataSync::initAndStart(const Json::Value &config) {
   /// Initialize and start the plugin
@@ -21,39 +21,39 @@ void DataSync::initAndStart(const Json::Value &config) {
 }
 
 void DataSync::doSync() {
-  auto http_client = drogon::HttpClient::newHttpClient(
-      "https://raw.githubusercontent.com", drogon::app().getLoop());
-  auto request = drogon::HttpRequest::newHttpRequest();
-  request->setPath("/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata/"
-                   "excel/character_table.json");
-  auto [result, response] = http_client->sendRequest(request);
-  if (result == drogon::ReqResult::Ok) {
-    auto data = response->getJsonObject();
-    auto keys = data->getMemberNames();
+  std::ifstream ifs(
+      "./repo/ArknightsGameData/zh_CN/gamedata/excel/activity_table.json");
+  Json::Reader reader;
+  Json::Value root;
+  auto success = reader.parse(ifs, root);
+  if (success) {
+    auto data = root.get("basicInfo", Json::Value::null);
+    auto keys = data.getMemberNames();
     for (const auto &key : keys) {
-      auto value = data->get(key, Json::Value());
+      auto value = data.get(key, Json::Value());
       if (!value.isNull()) {
-        Mapper<Character> mp(drogon::app().getDbClient("gamedata"));
-        value["id"] = key;
-        value["tagList"] = value["tagList"].toStyledString();
+        Mapper<Activity> mp(drogon::app().getDbClient("gamedata"));
+        // value["id"] = key;
+        // value["tagList"] = "[]";
+        value["ungroupedMedalIds"] = toString(value["ungroupedMedalIds"]);
         try {
           auto obj = mp.findByPrimaryKey(key);
           obj.updateByJson(value);
           mp.update(obj);
-          std::cout << "updated character: " << key << "\n";
+          std::cout << "updated Activity: " << key << "\n";
         } catch (const UnexpectedRows &) {
-          Character obj(value);
+          Activity obj(value);
           mp.insert(obj);
-          std::cout << "inserted character: " << key << "\n";
-        } catch (const DrogonDbException& ex) {
+          std::cout << "inserted Activity: " << key << "\n";
+        } catch (const DrogonDbException &ex) {
           std::cerr << ex.base().what() << "\n";
         }
       }
     }
   } else {
+    std::cerr << "Json parse error";
   }
-
-  auto cronexpr = cron::make_cron("0 0 5,17 * * *");
+  auto cronexpr = cron::make_cron("0 30 4,16 * * *");
   auto now = time(nullptr);
   auto diff = cron::cron_next(cronexpr, now) - now;
   loop_->runAfter(std::chrono::seconds(diff), [this] { doSync(); });

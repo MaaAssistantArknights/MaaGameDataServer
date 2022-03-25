@@ -36,8 +36,6 @@ namespace drogon_model
 {
 namespace MaaGameData
 {
-namespace gamedata
-{
 
 class Item
 {
@@ -283,13 +281,13 @@ class Item
   public:
     static const std::string &sqlForFindingByPrimaryKey()
     {
-        static const std::string sql="select * from " + tableName + " where itemId = $1";
+        static const std::string sql="select * from " + tableName + " where itemId = ?";
         return sql;
     }
 
     static const std::string &sqlForDeletingByPrimaryKey()
     {
-        static const std::string sql="delete from " + tableName + " where itemId = $1";
+        static const std::string sql="delete from " + tableName + " where itemId = ?";
         return sql;
     }
     std::string sqlForInserting(bool &needSelection) const
@@ -375,95 +373,84 @@ class Item
         else
             sql += ") values (";
 
-        int placeholder=1;
-        char placeholderStr[64];
-        size_t n=0;
         if(dirtyFlag_[0])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[1])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[2])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[3])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[4])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[5])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[6])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[7])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[8])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[9])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[10])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[11])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[12])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[13])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(parametersCount > 0)
         {
             sql.resize(sql.length() - 1);
         }
-        if(needSelection)
-        {
-            sql.append(") returning *");
-        }
-        else
-        {
-            sql.append(1, ')');
-        }
+        sql.append(1, ')');
         LOG_TRACE << sql;
         return sql;
     }
 };
-} // namespace gamedata
 } // namespace MaaGameData
 } // namespace drogon_model

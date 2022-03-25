@@ -7,14 +7,20 @@
 #pragma once
 
 #include <chrono>
+#include <fstream>
+#include <memory>
+#include <thread>
+
 #include <drogon/HttpClient.h>
 #include <drogon/drogon.h>
 #include <drogon/plugins/Plugin.h>
-#include <memory>
-#include <thread>
-#include <util/croncpp.h>
+#include <json/json.h>
 
-#include "Character.h"
+#include "util/croncpp.h"
+#include "util/json.h"
+
+#include "Activity.h"
+#include "Characters.h"
 
 class DataSync : public drogon::Plugin<DataSync> {
 public:
@@ -30,6 +36,6 @@ public:
   void doSync();
 
 private:
-  trantor::EventLoop* loop_ = nullptr;
+  trantor::EventLoop *loop_ = nullptr;
   std::thread worker_;
 };

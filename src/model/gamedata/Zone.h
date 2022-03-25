@@ -36,8 +36,6 @@ namespace drogon_model
 {
 namespace MaaGameData
 {
-namespace gamedata
-{
 
 class Zone
 {
@@ -206,11 +204,11 @@ class Zone
 
     /**  For column canPreview  */
     ///Get the value of the column canPreview, returns the default value if the column is null
-    const bool &getValueOfCanpreview() const noexcept;
+    const int8_t &getValueOfCanpreview() const noexcept;
     ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
-    const std::shared_ptr<bool> &getCanpreview() const noexcept;
+    const std::shared_ptr<int8_t> &getCanpreview() const noexcept;
     ///Set the value of the column canPreview
-    void setCanpreview(const bool &pCanpreview) noexcept;
+    void setCanpreview(const int8_t &pCanpreview) noexcept;
     void setCanpreviewToNull() noexcept;
 
 
@@ -241,7 +239,7 @@ class Zone
     std::shared_ptr<std::string> zonenametitleex_;
     std::shared_ptr<std::string> zonenamethird_;
     std::shared_ptr<std::string> lockedtext_;
-    std::shared_ptr<bool> canpreview_;
+    std::shared_ptr<int8_t> canpreview_;
     struct MetaData
     {
         const std::string colName_;
@@ -257,13 +255,13 @@ class Zone
   public:
     static const std::string &sqlForFindingByPrimaryKey()
     {
-        static const std::string sql="select * from " + tableName + " where zoneId = $1";
+        static const std::string sql="select * from " + tableName + " where zoneId = ?";
         return sql;
     }
 
     static const std::string &sqlForDeletingByPrimaryKey()
     {
-        static const std::string sql="delete from " + tableName + " where zoneId = $1";
+        static const std::string sql="delete from " + tableName + " where zoneId = ?";
         return sql;
     }
     std::string sqlForInserting(bool &needSelection) const
@@ -334,80 +332,69 @@ class Zone
         else
             sql += ") values (";
 
-        int placeholder=1;
-        char placeholderStr[64];
-        size_t n=0;
         if(dirtyFlag_[0])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[1])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[2])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[3])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[4])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[5])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[6])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[7])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[8])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[9])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(dirtyFlag_[10])
         {
-            n = sprintf(placeholderStr,"$%d,",placeholder++);
-            sql.append(placeholderStr, n);
+            sql.append("?,");
+
         }
         if(parametersCount > 0)
         {
             sql.resize(sql.length() - 1);
         }
-        if(needSelection)
-        {
-            sql.append(") returning *");
-        }
-        else
-        {
-            sql.append(1, ')');
-        }
+        sql.append(1, ')');
         LOG_TRACE << sql;
         return sql;
     }
 };
-} // namespace gamedata
 } // namespace MaaGameData
 } // namespace drogon_model

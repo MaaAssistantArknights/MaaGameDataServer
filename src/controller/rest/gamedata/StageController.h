@@ -12,7 +12,7 @@
 
 #include "Stage.h"
 using namespace drogon;
-using namespace drogon_model::MaaGameData::gamedata;
+using namespace drogon_model::MaaGameData;
 /**
  * @brief this class is created by the drogon_ctl command.
  * this class is a restful API controller for reading and writing the stage table.

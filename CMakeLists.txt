@@ -16,13 +16,6 @@ add_subdirectory(thirdparty/spdlog)
 # drogon 网络库
 set(BUILD_CTL OFF)
 set(BUILD_EXAMPLES OFF)
-set(BUILD_POSTGRESQL ON)
-set(BUILD_MYSQL OFF)
-set(BUILD_SQLITE OFF)
-set(BUILD_REDIS OFF)
-set(USE_MYSQL OFF)
-set(USE_SQLITE3 OFF)
-set(USE_REDIS OFF)
 add_subdirectory(thirdparty/drogon)
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})

@@ -11,7 +11,7 @@
 
 using namespace drogon;
 using namespace drogon::orm;
-using namespace drogon_model::MaaGameData::gamedata;
+using namespace drogon_model::MaaGameData;
 
 const std::string Activity::Cols::_id = "id";
 const std::string Activity::Cols::_type = "type";
@@ -30,23 +30,23 @@ const std::string Activity::Cols::_isReplicate = "isReplicate";
 const std::string Activity::Cols::_ungroupedMedalIds = "ungroupedMedalIds";
 const std::string Activity::primaryKeyName = "id";
 const bool Activity::hasPrimaryKey = true;
-const std::string Activity::tableName = "gamedata.activity";
+const std::string Activity::tableName = "activity";
 
 const std::vector<typename Activity::MetaData> Activity::metaData_={
-{"id","std::string","character varying",255,0,1,1},
-{"type","std::string","character varying",255,0,0,1},
-{"displayType","std::string","character varying",255,0,0,0},
-{"name","std::string","character varying",255,0,0,1},
-{"startTime","::trantor::Date","timestamp without time zone",0,0,0,1},
-{"endTime","::trantor::Date","timestamp without time zone",0,0,0,1},
-{"rewardEndTime","::trantor::Date","timestamp without time zone",0,0,0,1},
-{"displayOnHome","bool","boolean",1,0,0,1},
-{"hasStage","bool","boolean",1,0,0,1},
-{"actTopBarColor","std::string","character varying",255,0,0,0},
-{"actTopBarText","std::string","character varying",255,0,0,0},
-{"templateShopId","std::string","character varying",255,0,0,0},
-{"medalGroupId","std::string","character varying",255,0,0,0},
-{"isReplicate","bool","boolean",1,0,0,1},
+{"id","std::string","varchar(255)",255,0,1,1},
+{"type","std::string","varchar(255)",255,0,0,1},
+{"displayType","std::string","varchar(255)",255,0,0,0},
+{"name","std::string","varchar(255)",255,0,0,1},
+{"startTime","int64_t","bigint",8,0,0,0},
+{"endTime","int64_t","bigint",8,0,0,0},
+{"rewardEndTime","int64_t","bigint",8,0,0,0},
+{"displayOnHome","int8_t","tinyint(1)",1,0,0,1},
+{"hasStage","int8_t","tinyint(1)",1,0,0,1},
+{"actTopBarColor","std::string","varchar(255)",255,0,0,0},
+{"actTopBarText","std::string","varchar(255)",255,0,0,0},
+{"templateShopId","std::string","varchar(255)",255,0,0,0},
+{"medalGroupId","std::string","varchar(255)",255,0,0,0},
+{"isReplicate","int8_t","tinyint(1)",1,0,0,1},
 {"ungroupedMedalIds","std::string","json",0,0,0,0}
 };
 const std::string &Activity::getColumnName(size_t index) noexcept(false)
@@ -76,77 +76,23 @@ Activity::Activity(const Row &r, const ssize_t indexOffset) noexcept
         }
         if(!r["startTime"].isNull())
         {
-            auto timeStr = r["startTime"].as<std::string>();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                starttime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            starttime_=std::make_shared<int64_t>(r["startTime"].as<int64_t>());
         }
         if(!r["endTime"].isNull())
         {
-            auto timeStr = r["endTime"].as<std::string>();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                endtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            endtime_=std::make_shared<int64_t>(r["endTime"].as<int64_t>());
         }
         if(!r["rewardEndTime"].isNull())
         {
-            auto timeStr = r["rewardEndTime"].as<std::string>();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                rewardendtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            rewardendtime_=std::make_shared<int64_t>(r["rewardEndTime"].as<int64_t>());
         }
         if(!r["displayOnHome"].isNull())
         {
-            displayonhome_=std::make_shared<bool>(r["displayOnHome"].as<bool>());
+            displayonhome_=std::make_shared<int8_t>(r["displayOnHome"].as<int8_t>());
         }
         if(!r["hasStage"].isNull())
         {
-            hasstage_=std::make_shared<bool>(r["hasStage"].as<bool>());
+            hasstage_=std::make_shared<int8_t>(r["hasStage"].as<int8_t>());
         }
         if(!r["actTopBarColor"].isNull())
         {
@@ -166,7 +112,7 @@ Activity::Activity(const Row &r, const ssize_t indexOffset) noexcept
         }
         if(!r["isReplicate"].isNull())
         {
-            isreplicate_=std::make_shared<bool>(r["isReplicate"].as<bool>());
+            isreplicate_=std::make_shared<int8_t>(r["isReplicate"].as<int8_t>());
         }
         if(!r["ungroupedMedalIds"].isNull())
         {
@@ -205,81 +151,27 @@ Activity::Activity(const Row &r, const ssize_t indexOffset) noexcept
         index = offset + 4;
         if(!r[index].isNull())
         {
-            auto timeStr = r[index].as<std::string>();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                starttime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            starttime_=std::make_shared<int64_t>(r[index].as<int64_t>());
         }
         index = offset + 5;
         if(!r[index].isNull())
         {
-            auto timeStr = r[index].as<std::string>();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                endtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            endtime_=std::make_shared<int64_t>(r[index].as<int64_t>());
         }
         index = offset + 6;
         if(!r[index].isNull())
         {
-            auto timeStr = r[index].as<std::string>();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                rewardendtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            rewardendtime_=std::make_shared<int64_t>(r[index].as<int64_t>());
         }
         index = offset + 7;
         if(!r[index].isNull())
         {
-            displayonhome_=std::make_shared<bool>(r[index].as<bool>());
+            displayonhome_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 8;
         if(!r[index].isNull())
         {
-            hasstage_=std::make_shared<bool>(r[index].as<bool>());
+            hasstage_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 9;
         if(!r[index].isNull())
@@ -304,7 +196,7 @@ Activity::Activity(const Row &r, const ssize_t indexOffset) noexcept
         index = offset + 13;
         if(!r[index].isNull())
         {
-            isreplicate_=std::make_shared<bool>(r[index].as<bool>());
+            isreplicate_=std::make_shared<int8_t>(r[index].as<int8_t>());
         }
         index = offset + 14;
         if(!r[index].isNull())
@@ -359,25 +251,7 @@ Activity::Activity(const Json::Value &pJson, const std::vector<std::string> &pMa
         dirtyFlag_[4] = true;
         if(!pJson[pMasqueradingVector[4]].isNull())
         {
-            auto timeStr = pJson[pMasqueradingVector[4]].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                starttime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            starttime_=std::make_shared<int64_t>((int64_t)pJson[pMasqueradingVector[4]].asInt64());
         }
     }
     if(!pMasqueradingVector[5].empty() && pJson.isMember(pMasqueradingVector[5]))
@@ -385,25 +259,7 @@ Activity::Activity(const Json::Value &pJson, const std::vector<std::string> &pMa
         dirtyFlag_[5] = true;
         if(!pJson[pMasqueradingVector[5]].isNull())
         {
-            auto timeStr = pJson[pMasqueradingVector[5]].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                endtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            endtime_=std::make_shared<int64_t>((int64_t)pJson[pMasqueradingVector[5]].asInt64());
         }
     }
     if(!pMasqueradingVector[6].empty() && pJson.isMember(pMasqueradingVector[6]))
@@ -411,25 +267,7 @@ Activity::Activity(const Json::Value &pJson, const std::vector<std::string> &pMa
         dirtyFlag_[6] = true;
         if(!pJson[pMasqueradingVector[6]].isNull())
         {
-            auto timeStr = pJson[pMasqueradingVector[6]].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                rewardendtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            rewardendtime_=std::make_shared<int64_t>((int64_t)pJson[pMasqueradingVector[6]].asInt64());
         }
     }
     if(!pMasqueradingVector[7].empty() && pJson.isMember(pMasqueradingVector[7]))
@@ -437,7 +275,7 @@ Activity::Activity(const Json::Value &pJson, const std::vector<std::string> &pMa
         dirtyFlag_[7] = true;
         if(!pJson[pMasqueradingVector[7]].isNull())
         {
-            displayonhome_=std::make_shared<bool>(pJson[pMasqueradingVector[7]].asBool());
+            displayonhome_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[7]].asInt64());
         }
     }
     if(!pMasqueradingVector[8].empty() && pJson.isMember(pMasqueradingVector[8]))
@@ -445,7 +283,7 @@ Activity::Activity(const Json::Value &pJson, const std::vector<std::string> &pMa
         dirtyFlag_[8] = true;
         if(!pJson[pMasqueradingVector[8]].isNull())
         {
-            hasstage_=std::make_shared<bool>(pJson[pMasqueradingVector[8]].asBool());
+            hasstage_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[8]].asInt64());
         }
     }
     if(!pMasqueradingVector[9].empty() && pJson.isMember(pMasqueradingVector[9]))
@@ -485,7 +323,7 @@ Activity::Activity(const Json::Value &pJson, const std::vector<std::string> &pMa
         dirtyFlag_[13] = true;
         if(!pJson[pMasqueradingVector[13]].isNull())
         {
-            isreplicate_=std::make_shared<bool>(pJson[pMasqueradingVector[13]].asBool());
+            isreplicate_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[13]].asInt64());
         }
     }
     if(!pMasqueradingVector[14].empty() && pJson.isMember(pMasqueradingVector[14]))
@@ -537,25 +375,7 @@ Activity::Activity(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[4]=true;
         if(!pJson["startTime"].isNull())
         {
-            auto timeStr = pJson["startTime"].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                starttime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            starttime_=std::make_shared<int64_t>((int64_t)pJson["startTime"].asInt64());
         }
     }
     if(pJson.isMember("endTime"))
@@ -563,25 +383,7 @@ Activity::Activity(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[5]=true;
         if(!pJson["endTime"].isNull())
         {
-            auto timeStr = pJson["endTime"].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                endtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            endtime_=std::make_shared<int64_t>((int64_t)pJson["endTime"].asInt64());
         }
     }
     if(pJson.isMember("rewardEndTime"))
@@ -589,25 +391,7 @@ Activity::Activity(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[6]=true;
         if(!pJson["rewardEndTime"].isNull())
         {
-            auto timeStr = pJson["rewardEndTime"].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                rewardendtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            rewardendtime_=std::make_shared<int64_t>((int64_t)pJson["rewardEndTime"].asInt64());
         }
     }
     if(pJson.isMember("displayOnHome"))
@@ -615,7 +399,7 @@ Activity::Activity(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[7]=true;
         if(!pJson["displayOnHome"].isNull())
         {
-            displayonhome_=std::make_shared<bool>(pJson["displayOnHome"].asBool());
+            displayonhome_=std::make_shared<int8_t>((int8_t)pJson["displayOnHome"].asInt64());
         }
     }
     if(pJson.isMember("hasStage"))
@@ -623,7 +407,7 @@ Activity::Activity(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[8]=true;
         if(!pJson["hasStage"].isNull())
         {
-            hasstage_=std::make_shared<bool>(pJson["hasStage"].asBool());
+            hasstage_=std::make_shared<int8_t>((int8_t)pJson["hasStage"].asInt64());
         }
     }
     if(pJson.isMember("actTopBarColor"))
@@ -663,7 +447,7 @@ Activity::Activity(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[13]=true;
         if(!pJson["isReplicate"].isNull())
         {
-            isreplicate_=std::make_shared<bool>(pJson["isReplicate"].asBool());
+            isreplicate_=std::make_shared<int8_t>((int8_t)pJson["isReplicate"].asInt64());
         }
     }
     if(pJson.isMember("ungroupedMedalIds"))
@@ -720,25 +504,7 @@ void Activity::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[4] = true;
         if(!pJson[pMasqueradingVector[4]].isNull())
         {
-            auto timeStr = pJson[pMasqueradingVector[4]].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                starttime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            starttime_=std::make_shared<int64_t>((int64_t)pJson[pMasqueradingVector[4]].asInt64());
         }
     }
     if(!pMasqueradingVector[5].empty() && pJson.isMember(pMasqueradingVector[5]))
@@ -746,25 +512,7 @@ void Activity::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[5] = true;
         if(!pJson[pMasqueradingVector[5]].isNull())
         {
-            auto timeStr = pJson[pMasqueradingVector[5]].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                endtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            endtime_=std::make_shared<int64_t>((int64_t)pJson[pMasqueradingVector[5]].asInt64());
         }
     }
     if(!pMasqueradingVector[6].empty() && pJson.isMember(pMasqueradingVector[6]))
@@ -772,25 +520,7 @@ void Activity::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[6] = true;
         if(!pJson[pMasqueradingVector[6]].isNull())
         {
-            auto timeStr = pJson[pMasqueradingVector[6]].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                rewardendtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            rewardendtime_=std::make_shared<int64_t>((int64_t)pJson[pMasqueradingVector[6]].asInt64());
         }
     }
     if(!pMasqueradingVector[7].empty() && pJson.isMember(pMasqueradingVector[7]))
@@ -798,7 +528,7 @@ void Activity::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[7] = true;
         if(!pJson[pMasqueradingVector[7]].isNull())
         {
-            displayonhome_=std::make_shared<bool>(pJson[pMasqueradingVector[7]].asBool());
+            displayonhome_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[7]].asInt64());
         }
     }
     if(!pMasqueradingVector[8].empty() && pJson.isMember(pMasqueradingVector[8]))
@@ -806,7 +536,7 @@ void Activity::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[8] = true;
         if(!pJson[pMasqueradingVector[8]].isNull())
         {
-            hasstage_=std::make_shared<bool>(pJson[pMasqueradingVector[8]].asBool());
+            hasstage_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[8]].asInt64());
         }
     }
     if(!pMasqueradingVector[9].empty() && pJson.isMember(pMasqueradingVector[9]))
@@ -846,7 +576,7 @@ void Activity::updateByMasqueradedJson(const Json::Value &pJson,
         dirtyFlag_[13] = true;
         if(!pJson[pMasqueradingVector[13]].isNull())
         {
-            isreplicate_=std::make_shared<bool>(pJson[pMasqueradingVector[13]].asBool());
+            isreplicate_=std::make_shared<int8_t>((int8_t)pJson[pMasqueradingVector[13]].asInt64());
         }
     }
     if(!pMasqueradingVector[14].empty() && pJson.isMember(pMasqueradingVector[14]))
@@ -897,25 +627,7 @@ void Activity::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[4] = true;
         if(!pJson["startTime"].isNull())
         {
-            auto timeStr = pJson["startTime"].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                starttime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            starttime_=std::make_shared<int64_t>((int64_t)pJson["startTime"].asInt64());
         }
     }
     if(pJson.isMember("endTime"))
@@ -923,25 +635,7 @@ void Activity::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[5] = true;
         if(!pJson["endTime"].isNull())
         {
-            auto timeStr = pJson["endTime"].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                endtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            endtime_=std::make_shared<int64_t>((int64_t)pJson["endTime"].asInt64());
         }
     }
     if(pJson.isMember("rewardEndTime"))
@@ -949,25 +643,7 @@ void Activity::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[6] = true;
         if(!pJson["rewardEndTime"].isNull())
         {
-            auto timeStr = pJson["rewardEndTime"].asString();
-            struct tm stm;
-            memset(&stm,0,sizeof(stm));
-            auto p = strptime(timeStr.c_str(),"%Y-%m-%d %H:%M:%S",&stm);
-            time_t t = mktime(&stm);
-            size_t decimalNum = 0;
-            if(p)
-            {
-                if(*p=='.')
-                {
-                    std::string decimals(p+1,&timeStr[timeStr.length()]);
-                    while(decimals.length()<6)
-                    {
-                        decimals += "0";
-                    }
-                    decimalNum = (size_t)atol(decimals.c_str());
-                }
-                rewardendtime_=std::make_shared<::trantor::Date>(t*1000000+decimalNum);
-            }
+            rewardendtime_=std::make_shared<int64_t>((int64_t)pJson["rewardEndTime"].asInt64());
         }
     }
     if(pJson.isMember("displayOnHome"))
@@ -975,7 +651,7 @@ void Activity::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[7] = true;
         if(!pJson["displayOnHome"].isNull())
         {
-            displayonhome_=std::make_shared<bool>(pJson["displayOnHome"].asBool());
+            displayonhome_=std::make_shared<int8_t>((int8_t)pJson["displayOnHome"].asInt64());
         }
     }
     if(pJson.isMember("hasStage"))
@@ -983,7 +659,7 @@ void Activity::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[8] = true;
         if(!pJson["hasStage"].isNull())
         {
-            hasstage_=std::make_shared<bool>(pJson["hasStage"].asBool());
+            hasstage_=std::make_shared<int8_t>((int8_t)pJson["hasStage"].asInt64());
         }
     }
     if(pJson.isMember("actTopBarColor"))
@@ -1023,7 +699,7 @@ void Activity::updateByJson(const Json::Value &pJson) noexcept(false)
         dirtyFlag_[13] = true;
         if(!pJson["isReplicate"].isNull())
         {
-            isreplicate_=std::make_shared<bool>(pJson["isReplicate"].asBool());
+            isreplicate_=std::make_shared<int8_t>((int8_t)pJson["isReplicate"].asInt64());
         }
     }
     if(pJson.isMember("ungroupedMedalIds"))
@@ -1134,88 +810,103 @@ void Activity::setName(std::string &&pName) noexcept
     dirtyFlag_[3] = true;
 }
 
-const ::trantor::Date &Activity::getValueOfStarttime() const noexcept
+const int64_t &Activity::getValueOfStarttime() const noexcept
 {
-    const static ::trantor::Date defaultValue = ::trantor::Date();
+    const static int64_t defaultValue = int64_t();
     if(starttime_)
         return *starttime_;
     return defaultValue;
 }
-const std::shared_ptr<::trantor::Date> &Activity::getStarttime() const noexcept
+const std::shared_ptr<int64_t> &Activity::getStarttime() const noexcept
 {
     return starttime_;
 }
-void Activity::setStarttime(const ::trantor::Date &pStarttime) noexcept
+void Activity::setStarttime(const int64_t &pStarttime) noexcept
 {
-    starttime_ = std::make_shared<::trantor::Date>(pStarttime);
+    starttime_ = std::make_shared<int64_t>(pStarttime);
+    dirtyFlag_[4] = true;
+}
+void Activity::setStarttimeToNull() noexcept
+{
+    starttime_.reset();
     dirtyFlag_[4] = true;
 }
 
-const ::trantor::Date &Activity::getValueOfEndtime() const noexcept
+const int64_t &Activity::getValueOfEndtime() const noexcept
 {
-    const static ::trantor::Date defaultValue = ::trantor::Date();
+    const static int64_t defaultValue = int64_t();
     if(endtime_)
         return *endtime_;
     return defaultValue;
 }
-const std::shared_ptr<::trantor::Date> &Activity::getEndtime() const noexcept
+const std::shared_ptr<int64_t> &Activity::getEndtime() const noexcept
 {
     return endtime_;
 }
-void Activity::setEndtime(const ::trantor::Date &pEndtime) noexcept
+void Activity::setEndtime(const int64_t &pEndtime) noexcept
 {
-    endtime_ = std::make_shared<::trantor::Date>(pEndtime);
+    endtime_ = std::make_shared<int64_t>(pEndtime);
+    dirtyFlag_[5] = true;
+}
+void Activity::setEndtimeToNull() noexcept
+{
+    endtime_.reset();
     dirtyFlag_[5] = true;
 }
 
-const ::trantor::Date &Activity::getValueOfRewardendtime() const noexcept
+const int64_t &Activity::getValueOfRewardendtime() const noexcept
 {
-    const static ::trantor::Date defaultValue = ::trantor::Date();
+    const static int64_t defaultValue = int64_t();
     if(rewardendtime_)
         return *rewardendtime_;
     return defaultValue;
 }
-const std::shared_ptr<::trantor::Date> &Activity::getRewardendtime() const noexcept
+const std::shared_ptr<int64_t> &Activity::getRewardendtime() const noexcept
 {
     return rewardendtime_;
 }
-void Activity::setRewardendtime(const ::trantor::Date &pRewardendtime) noexcept
+void Activity::setRewardendtime(const int64_t &pRewardendtime) noexcept
 {
-    rewardendtime_ = std::make_shared<::trantor::Date>(pRewardendtime);
+    rewardendtime_ = std::make_shared<int64_t>(pRewardendtime);
+    dirtyFlag_[6] = true;
+}
+void Activity::setRewardendtimeToNull() noexcept
+{
+    rewardendtime_.reset();
     dirtyFlag_[6] = true;
 }
 
-const bool &Activity::getValueOfDisplayonhome() const noexcept
+const int8_t &Activity::getValueOfDisplayonhome() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(displayonhome_)
         return *displayonhome_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Activity::getDisplayonhome() const noexcept
+const std::shared_ptr<int8_t> &Activity::getDisplayonhome() const noexcept
 {
     return displayonhome_;
 }
-void Activity::setDisplayonhome(const bool &pDisplayonhome) noexcept
+void Activity::setDisplayonhome(const int8_t &pDisplayonhome) noexcept
 {
-    displayonhome_ = std::make_shared<bool>(pDisplayonhome);
+    displayonhome_ = std::make_shared<int8_t>(pDisplayonhome);
     dirtyFlag_[7] = true;
 }
 
-const bool &Activity::getValueOfHasstage() const noexcept
+const int8_t &Activity::getValueOfHasstage() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(hasstage_)
         return *hasstage_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Activity::getHasstage() const noexcept
+const std::shared_ptr<int8_t> &Activity::getHasstage() const noexcept
 {
     return hasstage_;
 }
-void Activity::setHasstage(const bool &pHasstage) noexcept
+void Activity::setHasstage(const int8_t &pHasstage) noexcept
 {
-    hasstage_ = std::make_shared<bool>(pHasstage);
+    hasstage_ = std::make_shared<int8_t>(pHasstage);
     dirtyFlag_[8] = true;
 }
 
@@ -1327,20 +1018,20 @@ void Activity::setMedalgroupidToNull() noexcept
     dirtyFlag_[12] = true;
 }
 
-const bool &Activity::getValueOfIsreplicate() const noexcept
+const int8_t &Activity::getValueOfIsreplicate() const noexcept
 {
-    const static bool defaultValue = bool();
+    const static int8_t defaultValue = int8_t();
     if(isreplicate_)
         return *isreplicate_;
     return defaultValue;
 }
-const std::shared_ptr<bool> &Activity::getIsreplicate() const noexcept
+const std::shared_ptr<int8_t> &Activity::getIsreplicate() const noexcept
 {
     return isreplicate_;
 }
-void Activity::setIsreplicate(const bool &pIsreplicate) noexcept
+void Activity::setIsreplicate(const int8_t &pIsreplicate) noexcept
 {
-    isreplicate_ = std::make_shared<bool>(pIsreplicate);
+    isreplicate_ = std::make_shared<int8_t>(pIsreplicate);
     dirtyFlag_[13] = true;
 }
 
@@ -1837,7 +1528,7 @@ Json::Value Activity::toJson() const
     }
     if(getStarttime())
     {
-        ret["startTime"]=getStarttime()->toDbStringLocal();
+        ret["startTime"]=(Json::Int64)getValueOfStarttime();
     }
     else
     {
@@ -1845,7 +1536,7 @@ Json::Value Activity::toJson() const
     }
     if(getEndtime())
     {
-        ret["endTime"]=getEndtime()->toDbStringLocal();
+        ret["endTime"]=(Json::Int64)getValueOfEndtime();
     }
     else
     {
@@ -1853,7 +1544,7 @@ Json::Value Activity::toJson() const
     }
     if(getRewardendtime())
     {
-        ret["rewardEndTime"]=getRewardendtime()->toDbStringLocal();
+        ret["rewardEndTime"]=(Json::Int64)getValueOfRewardendtime();
     }
     else
     {
@@ -1980,7 +1671,7 @@ Json::Value Activity::toMasqueradedJson(
         {
             if(getStarttime())
             {
-                ret[pMasqueradingVector[4]]=getStarttime()->toDbStringLocal();
+                ret[pMasqueradingVector[4]]=(Json::Int64)getValueOfStarttime();
             }
             else
             {
@@ -1991,7 +1682,7 @@ Json::Value Activity::toMasqueradedJson(
         {
             if(getEndtime())
             {
-                ret[pMasqueradingVector[5]]=getEndtime()->toDbStringLocal();
+                ret[pMasqueradingVector[5]]=(Json::Int64)getValueOfEndtime();
             }
             else
             {
@@ -2002,7 +1693,7 @@ Json::Value Activity::toMasqueradedJson(
         {
             if(getRewardendtime())
             {
-                ret[pMasqueradingVector[6]]=getRewardendtime()->toDbStringLocal();
+                ret[pMasqueradingVector[6]]=(Json::Int64)getValueOfRewardendtime();
             }
             else
             {
@@ -2134,7 +1825,7 @@ Json::Value Activity::toMasqueradedJson(
     }
     if(getStarttime())
     {
-        ret["startTime"]=getStarttime()->toDbStringLocal();
+        ret["startTime"]=(Json::Int64)getValueOfStarttime();
     }
     else
     {
@@ -2142,7 +1833,7 @@ Json::Value Activity::toMasqueradedJson(
     }
     if(getEndtime())
     {
-        ret["endTime"]=getEndtime()->toDbStringLocal();
+        ret["endTime"]=(Json::Int64)getValueOfEndtime();
     }
     else
     {
@@ -2150,7 +1841,7 @@ Json::Value Activity::toMasqueradedJson(
     }
     if(getRewardendtime())
     {
-        ret["rewardEndTime"]=getRewardendtime()->toDbStringLocal();
+        ret["rewardEndTime"]=(Json::Int64)getValueOfRewardendtime();
     }
     else
     {
@@ -2265,30 +1956,15 @@ bool Activity::validateJsonForCreation(const Json::Value &pJson, std::string &er
         if(!validJsonOfField(4, "startTime", pJson["startTime"], err, true))
             return false;
     }
-    else
-    {
-        err="The startTime column cannot be null";
-        return false;
-    }
     if(pJson.isMember("endTime"))
     {
         if(!validJsonOfField(5, "endTime", pJson["endTime"], err, true))
             return false;
     }
-    else
-    {
-        err="The endTime column cannot be null";
-        return false;
-    }
     if(pJson.isMember("rewardEndTime"))
     {
         if(!validJsonOfField(6, "rewardEndTime", pJson["rewardEndTime"], err, true))
             return false;
-    }
-    else
-    {
-        err="The rewardEndTime column cannot be null";
-        return false;
     }
     if(pJson.isMember("displayOnHome"))
     {
@@ -2411,11 +2087,6 @@ bool Activity::validateMasqueradedJsonForCreation(const Json::Value &pJson,
               if(!validJsonOfField(4, pMasqueradingVector[4], pJson[pMasqueradingVector[4]], err, true))
                   return false;
           }
-        else
-        {
-            err="The " + pMasqueradingVector[4] + " column cannot be null";
-            return false;
-        }
       }
       if(!pMasqueradingVector[5].empty())
       {
@@ -2424,11 +2095,6 @@ bool Activity::validateMasqueradedJsonForCreation(const Json::Value &pJson,
               if(!validJsonOfField(5, pMasqueradingVector[5], pJson[pMasqueradingVector[5]], err, true))
                   return false;
           }
-        else
-        {
-            err="The " + pMasqueradingVector[5] + " column cannot be null";
-            return false;
-        }
       }
       if(!pMasqueradingVector[6].empty())
       {
@@ -2437,11 +2103,6 @@ bool Activity::validateMasqueradedJsonForCreation(const Json::Value &pJson,
               if(!validJsonOfField(6, pMasqueradingVector[6], pJson[pMasqueradingVector[6]], err, true))
                   return false;
           }
-        else
-        {
-            err="The " + pMasqueradingVector[6] + " column cannot be null";
-            return false;
-        }
       }
       if(!pMasqueradingVector[7].empty())
       {
@@ -2806,10 +2467,9 @@ bool Activity::validJsonOfField(size_t index,
         case 4:
             if(pJson.isNull())
             {
-                err="The " + fieldName + " column cannot be null";
-                return false;
+                return true;
             }
-            if(!pJson.isString())
+            if(!pJson.isInt64())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -2818,10 +2478,9 @@ bool Activity::validJsonOfField(size_t index,
         case 5:
             if(pJson.isNull())
             {
-                err="The " + fieldName + " column cannot be null";
-                return false;
+                return true;
             }
-            if(!pJson.isString())
+            if(!pJson.isInt64())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -2830,10 +2489,9 @@ bool Activity::validJsonOfField(size_t index,
         case 6:
             if(pJson.isNull())
             {
-                err="The " + fieldName + " column cannot be null";
-                return false;
+                return true;
             }
-            if(!pJson.isString())
+            if(!pJson.isInt64())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -2845,7 +2503,7 @@ bool Activity::validJsonOfField(size_t index,
                 err="The " + fieldName + " column cannot be null";
                 return false;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -2857,7 +2515,7 @@ bool Activity::validJsonOfField(size_t index,
                 err="The " + fieldName + " column cannot be null";
                 return false;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;
@@ -2949,7 +2607,7 @@ bool Activity::validJsonOfField(size_t index,
                 err="The " + fieldName + " column cannot be null";
                 return false;
             }
-            if(!pJson.isBool())
+            if(!pJson.isInt())
             {
                 err="Type error in the "+fieldName+" field";
                 return false;

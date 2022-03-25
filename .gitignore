@@ -7,6 +7,4 @@ cmake-build-*
 
 Debug/*
 
-thirdparty
-
 !.gitkeep

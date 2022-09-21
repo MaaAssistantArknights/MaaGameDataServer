@@ -1,4 +1,4 @@
-package org.maa.server.gamedata.util;
+package org.maa.server.gamedata.helper;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

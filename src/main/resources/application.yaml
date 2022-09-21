@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: 'jdbc:postgresql://127.0.0.1/MaaGameData'
-    username: '_chingc'
-    password: 'Lyy19990123'
+    username: ''
+    password: ''
   liquibase:
     enabled: true
     change-log: 'classpath:/db/changelog/liquibase.xml'

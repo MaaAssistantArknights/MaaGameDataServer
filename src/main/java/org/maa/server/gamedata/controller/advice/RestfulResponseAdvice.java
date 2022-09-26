@@ -18,10 +18,6 @@ public class RestfulResponseAdvice implements ResponseBodyAdvice<Object> {
         if ("org.springframework.http.ResponseEntity".equals(returnType.getGenericParameterType().getTypeName())) {
             return false;
         }
-
-        if (!converterType.getCanonicalName().contains("FastJson")) {
-            return false;
-        }
         final String className = returnType.getContainingClass().getCanonicalName();
         return className.startsWith("org.maa");
     }

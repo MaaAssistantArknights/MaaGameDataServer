@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Validated
-@TableName(value = "application.setting")
+@TableName(value = "gamedata.setting")
 @Schema(description = "服务器设置")
 public class Setting extends BaseResource {
     @Schema(description = "设置键", example = "schedule.auto_update.interval")

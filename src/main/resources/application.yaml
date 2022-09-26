@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: 'jdbc:postgresql://127.0.0.1/MaaGameData'
-    username: ''
-    password: ''
+    url: 'jdbc:postgresql://postgres.maa-org.net/dev'
+    username: 'dev-service-user'
+    password: 'r9soGiNHem7H4LIM'
   liquibase:
     enabled: true
     change-log: 'classpath:/db/changelog/liquibase.xml'
-    default-schema: 'application'
+    default-schema: 'gamedata'

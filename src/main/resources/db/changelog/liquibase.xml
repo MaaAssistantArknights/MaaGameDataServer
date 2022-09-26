@@ -9,7 +9,7 @@
 		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
 		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
     <changeSet id="1662807632-1" author="ChingCdesu(chingc.ccmail@gmail.com)">
-        <createTable schemaName="application" tableName="setting">
+        <createTable schemaName="gamedata" tableName="setting">
             <column name="id" type="int8" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>

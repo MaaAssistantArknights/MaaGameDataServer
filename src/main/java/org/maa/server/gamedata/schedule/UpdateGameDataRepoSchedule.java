@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Slf4j
 @Component
@@ -22,7 +24,7 @@ public class UpdateGameDataRepoSchedule {
     private static final String repoUrl = "https://github.com/yuanyan3060/Arknights-Bot-Resource";
     private Path repoDirectory = Paths.get("/data/gamedata");
 
-    private boolean runningLock = false;
+    private final Lock lock = new ReentrantLock();
 
     @Autowired
     public UpdateGameDataRepoSchedule(
@@ -35,17 +37,24 @@ public class UpdateGameDataRepoSchedule {
 
     @Scheduled(cron = "0 0 0/2 * * *")
     public void runSchedule() {
-        if (runningLock) {
+        if (!lock.tryLock()) {
             log.info("Another update process is running, this job will not start.");
             return;
         }
-        runningLock = true;
-        if (!checkRepoDirectory()) {
-            initRepo();
-        } else {
-            updateRepo();
+        try {
+            if (!checkRepoDirectory()) {
+                initRepo();
+            } else {
+                updateRepo();
+            }
         }
-        runningLock = false;
+        catch (Exception e) {
+            log.error("Update game data repo failed.", e);
+            e.printStackTrace();
+        }
+        finally {
+            lock.unlock();
+        }
     }
 
     private boolean checkRepoDirectory() {

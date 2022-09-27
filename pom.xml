@@ -89,6 +89,11 @@
             <artifactId>hutool-all</artifactId>
             <version>5.7.22</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>6.3.0.202209071007-r</version>
+        </dependency>
     </dependencies>
 
     <build>

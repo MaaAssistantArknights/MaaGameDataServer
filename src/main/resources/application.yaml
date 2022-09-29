@@ -7,4 +7,4 @@ spring:
     name: maaGameDataService
 
 server:
-  port: 8848
+  port: 8080

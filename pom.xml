@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.maa</groupId>
     <artifactId>MaaGameDataServer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-alpha.1</version>
     <name>MaaGameDataServer</name>
     <description>MaaGameDataServer</description>
     <properties>
@@ -103,6 +103,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>${project.artifactId}</finalName>
     </build>
 
 </project>

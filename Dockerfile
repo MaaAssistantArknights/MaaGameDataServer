@@ -3,6 +3,10 @@ WORKDIR /app
 
 ENV RUN_PROFILE prod
 
+ENV DB_URL ""
+ENV DB_USER ""
+ENV DB_PASS ""
+
 RUN apk --no-cache add bash
 
 COPY .mvn/ .mvn
@@ -15,4 +19,12 @@ ENTRYPOINT ["bash", "--"]
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "/app/target/MaaGameDataServer.jar", "--spring.profiles.active=$RUN_PROFILE"]
+CMD [ \
+    "java", \
+    "-jar", \
+    "/app/target/MaaGameDataServer.jar", \
+    "--spring.profiles.active=$RUN_PROFILE", \
+    "--spring.datasource.url=$DB_URL", \
+    "--spring.datasource.username=$DB_USER", \
+    "--spring.datasource.password=$DB_PASS" \
+    ]

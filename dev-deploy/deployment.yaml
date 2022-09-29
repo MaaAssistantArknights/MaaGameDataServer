@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: game-data-api-deployment
+  namespace: maa-dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      maa-org.net/app: game-data-api
+  template:
+    metadata:
+      labels:
+        maa-org.net/app: game-data-api
+    spec:
+      env:
+        - name: RUN_PROFILE
+          value: dev
+      envFrom:
+        - secretRef:
+            name: jdbc.postgres.dev
+      containers:
+        - image: ghcr.io/maaassistantarknights/maagamedataserver:0.0.1-alpha.3
+          name: MaaGameDataServer
+          ports:
+            - containerPort: 8080
+      nodeSelector:
+        role: service
+        environment: dev

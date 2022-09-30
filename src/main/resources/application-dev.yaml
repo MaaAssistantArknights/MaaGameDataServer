@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: 'jdbc:postgresql://postgres.maa-org.net/dev'
+    url: 'jdbc:postgresql://postgres.maa-org.net.cn/dev'
     username: 'dev-service-user'
     password: 'r9soGiNHem7H4LIM'
 

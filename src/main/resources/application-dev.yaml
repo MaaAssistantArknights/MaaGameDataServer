@@ -1,9 +1,3 @@
-spring:
-  datasource:
-    url: 'jdbc:postgresql://postgres.maa-org.net.cn/dev'
-    username: 'dev-service-user'
-    password: 'r9soGiNHem7H4LIM'
-
 #开发环境启用mybatis sql log打印
 logging:
   level:

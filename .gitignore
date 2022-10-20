@@ -32,4 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-application-dev-local.yaml
+### Fleet ###
+.fleet/
+
+*-local.yaml

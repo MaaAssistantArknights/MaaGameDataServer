@@ -20,7 +20,7 @@ ENTRYPOINT ["bash", "--"]
 EXPOSE 8080
 
 CMD [ \
-    "java", \
+    "/usr/local/jre/bin/java", \
     "-jar", \
     "/app/target/MaaGameDataServer.jar", \
     "--spring.profiles.active=$RUN_PROFILE", \

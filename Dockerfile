@@ -15,11 +15,9 @@ RUN ./mvnw dependency:resolve
 COPY src ./src
 RUN ./mvnw package -Dmaven.test.skip=true
 
-ENTRYPOINT ["bash", "--"]
-
 EXPOSE 8080
 
-CMD [ \
+ENTRYPOINT [ \
     "/usr/local/jre/bin/java", \
     "-jar", \
     "/app/target/MaaGameDataServer.jar", \

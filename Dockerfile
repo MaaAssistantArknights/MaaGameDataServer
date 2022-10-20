@@ -18,7 +18,7 @@ RUN ./mvnw package -Dmaven.test.skip=true
 EXPOSE 8080
 
 ENTRYPOINT [ \
-    "/usr/local/jre/bin/java", \
+    "java", \
     "-jar", \
     "/app/target/MaaGameDataServer.jar", \
     "--spring.profiles.active=$RUN_PROFILE", \

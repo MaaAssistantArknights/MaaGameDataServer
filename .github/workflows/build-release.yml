@@ -47,4 +47,9 @@ jobs:
         push: true
         tags: ${{ steps.docker-meta.outputs.tags }}
         labels: ${{ steps.docker-meta.outputs.labels }}
-    
+
+    - uses: actions/delete-package-versions@v3
+      with:
+        package-name: MaaGameDataServer
+        min-versions-to-keep: 3
+        ignore-versions: '^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$'

@@ -7,6 +7,8 @@ import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +22,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 @Slf4j
 @Component
+@EnableAsync
 public class UpdateGameDataRepoSchedule {
     private static final String repoUrl = "https://github.com/yuanyan3060/Arknights-Bot-Resource";
     private Path repoDirectory = Paths.get("/data/gamedata");
-
     private final Lock lock = new ReentrantLock();
 
     @Autowired
@@ -31,14 +33,20 @@ public class UpdateGameDataRepoSchedule {
             ApplicationContext applicationContext
     ) {
         if (Objects.equals(applicationContext.getEnvironment().getActiveProfiles()[0], "dev")) {
-            this.repoDirectory = Paths.get(System.getProperty("user.home"), "gamedata");
+            this.repoDirectory = Paths.get(System.getProperty("user.dir"), "target", "gamedata");
         }
+       run();
+    }
+
+    public Path getRepoDirectory() {
+        return this.repoDirectory;
     }
 
     @Scheduled(cron = "0 0 0/2 * * *")
-    public void runSchedule() {
+    @Async
+    public void run() {
         if (!lock.tryLock()) {
-            log.info("Another update process is running, this job will not start.");
+            log.warn("Another update process is running, this job will not start.");
             return;
         }
         try {

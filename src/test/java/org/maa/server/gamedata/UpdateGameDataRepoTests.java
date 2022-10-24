@@ -19,7 +19,7 @@ class UpdateGameDataRepoTests {
 
     @Test
     void contextLoads() {
-        this.updateGameDataRepoSchedule.runSchedule();
+        this.updateGameDataRepoSchedule.run();
     }
 
 }

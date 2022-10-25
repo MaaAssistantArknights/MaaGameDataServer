@@ -2,10 +2,7 @@ package org.maa.server.gamedata.controller;
 
 import org.maa.server.gamedata.service.spi.IGameDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/gamedata")
@@ -26,7 +23,7 @@ public class GameDataController {
     }
 
     @PostMapping("/")
-    public Object getResource() {
-        return this.gameDataService.getResource();
+    public Object getResource(@RequestBody Object body) {
+        return this.gameDataService.getResource(body);
     }
 }

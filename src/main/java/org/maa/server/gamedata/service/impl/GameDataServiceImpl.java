@@ -33,7 +33,7 @@ public class GameDataServiceImpl implements IGameDataService {
         }
     }
 
-    public Object getResource() {
+    public Object getResource(Object body) {
         // TODO: support resource from json files
         return new Object();
     }

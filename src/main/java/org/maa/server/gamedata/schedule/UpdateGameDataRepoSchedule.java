@@ -35,14 +35,13 @@ public class UpdateGameDataRepoSchedule {
         if (Objects.equals(applicationContext.getEnvironment().getActiveProfiles()[0], "dev")) {
             this.repoDirectory = Paths.get(System.getProperty("user.dir"), "target", "gamedata");
         }
-       run();
     }
 
     public Path getRepoDirectory() {
         return this.repoDirectory;
     }
 
-    @Scheduled(cron = "0 0 0/2 * * *")
+    @Scheduled(initialDelay = 0, fixedRate = 2 * 60 * 60 * 1000)
     @Async
     public void run() {
         if (!lock.tryLock()) {
@@ -55,12 +54,10 @@ public class UpdateGameDataRepoSchedule {
             } else {
                 updateRepo();
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("Update game data repo failed.", e);
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             lock.unlock();
         }
     }

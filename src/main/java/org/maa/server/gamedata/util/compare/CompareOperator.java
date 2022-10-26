@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CompareOperator {
-    private String operator;
-    private String operation;
+    private final String operator;
+    private final String operation;
 
     public CompareOperator(String operation, String operator) {
         this.operation = operation;

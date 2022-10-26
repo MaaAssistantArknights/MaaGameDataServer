@@ -4,6 +4,9 @@ import org.maa.server.gamedata.service.spi.IGameDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/gamedata")
 public class GameDataController {
@@ -23,7 +26,7 @@ public class GameDataController {
     }
 
     @PostMapping("/")
-    public Object getResource(@RequestBody Object body) {
-        return this.gameDataService.getResource(body);
+    public Object getResource(@RequestParam String resourceType, @RequestBody Object body) {
+        return this.gameDataService.getResource(resourceType, body);
     }
 }

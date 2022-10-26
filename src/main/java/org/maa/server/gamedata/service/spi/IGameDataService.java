@@ -3,5 +3,5 @@ package org.maa.server.gamedata.service.spi;
 public interface IGameDataService {
     String currentGameDataVersion();
 
-    Object getResource(Object body);
+    Object getResource(String resourceType, Object body);
 }

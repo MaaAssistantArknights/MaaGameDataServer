@@ -14,6 +14,11 @@ public class ResponseMeta {
             ResponseCode.RESULT_SUCCESS.getHttpException().getMsg()
     );
 
+    public static final ResponseMeta RESULT_NOTFOUND = new ResponseMeta(
+            ResponseCode.RESULT_SUCCESS.getHttpException().getCode(),
+            ResponseCode.RESULT_SUCCESS.getHttpException().getMsg()
+    );
+
     private int code;
 
     private String msg;

@@ -5,13 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Schema(description = "")
 public class RestResponseBody<T> {
 
-    private ResponseMeta meta;
+    public RestResponseBody(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    public RestResponseBody(ResponseMeta meta, T data) {
+        this.code = meta.getCode();
+        this.msg = meta.getMsg();
+        this.data = data;
+    }
+
+    private int code;
+
+    private String msg;
 
     private T data;
 }

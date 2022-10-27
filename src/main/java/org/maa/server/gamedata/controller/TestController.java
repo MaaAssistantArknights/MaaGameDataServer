@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class TestController {
 
@@ -16,15 +18,14 @@ public class TestController {
         this.settingService = settingService;
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
+    @GetMapping("/list")
+    public List<Setting> list() {
+        return settingService.list();
     }
 
 
-    @GetMapping("/getById")
-    public Setting index(@RequestParam Integer id) {
-        return settingService.getById(id);
+    @GetMapping("/test")
+    public Setting test() {
+        return new Setting("key","value");
     }
-
 }

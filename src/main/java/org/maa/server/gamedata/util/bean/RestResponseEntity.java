@@ -1,5 +1,6 @@
 package org.maa.server.gamedata.util.bean;
 
+import org.maa.server.gamedata.util.exception.HttpErrorCode;
 import org.maa.server.gamedata.util.exception.HttpException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,6 @@ public class RestResponseEntity {
             this.meta = new ResponseMeta(code, msg);
         }
 
-
         @Override
         public RestResponseBuilder header(String headerName, String... headerValues) {
             builder.header(headerName, headerValues);
@@ -51,17 +51,39 @@ public class RestResponseEntity {
 
         @Override
         public ResponseEntity build() {
-            return builder.body(new RestResponseBody(meta, null));
+            return builder.body(new RestResponseBody<>(meta, null));
         }
 
         @Override
         public ResponseEntity body(Object body) {
-            return builder.body(new RestResponseBody(meta, body));
+            return builder.body(new RestResponseBody<>(meta, body));
         }
     }
 
 
     public static RestResponseBuilder ok() {
         return new DefaultBuilder();
+    }
+
+    public static RestResponseBuilder errorBuilder(HttpErrorCode errorCode) {
+        return new DefaultBuilder(errorCode.getHttpException());
+    }
+
+    public static RestResponseBuilder errorBuilder(HttpStatus httpStatus, int code, String msg) {
+        return new DefaultBuilder(httpStatus, code, msg);
+    }
+
+    public static ResponseEntity<Object> ok(Object body) {
+        return ResponseEntity.ok().body(new RestResponseBody<>(ResponseMeta.SUCCESS_META, body));
+    }
+
+    public static ResponseEntity<Object> error(HttpException exception) {
+        ResponseMeta meta = new ResponseMeta(exception.getCode(), exception.getMsg());
+        return ResponseEntity.status(exception.getHttpStatus()).body(new RestResponseBody<>(meta, (Object)null));
+    }
+
+    public static ResponseEntity<Object> error(int code, String msg, HttpStatus httpStatus) {
+        ResponseMeta meta = new ResponseMeta(code, msg);
+        return ResponseEntity.status(httpStatus).body(new RestResponseBody<>(meta, (Object)null));
     }
 }

@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.maa.server.gamedata.util.bean.ResponseMeta;
 import org.maa.server.gamedata.util.bean.RestResponseBody;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -31,6 +32,8 @@ public class RestfulResponseAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         if (body instanceof RestResponseBody) {
+            HttpStatus httpStatus = HttpStatus.resolve(((RestResponseBody<?>) body).getCode());
+            response.setStatusCode(httpStatus != null ? httpStatus : HttpStatus.INTERNAL_SERVER_ERROR);
             return body;
         }
         if (body instanceof String) {

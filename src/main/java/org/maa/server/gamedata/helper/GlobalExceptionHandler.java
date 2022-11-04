@@ -1,7 +1,5 @@
 package org.maa.server.gamedata.helper;
 
-
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.maa.server.gamedata.util.bean.RestResponseBody;
 import org.springframework.validation.BindException;

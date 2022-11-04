@@ -11,7 +11,6 @@ import java.sql.Timestamp;
 
 @Data
 public class BaseResource {
-
     @TableId(type = IdType.AUTO)
     private Integer id;
 
@@ -22,5 +21,4 @@ public class BaseResource {
     @JsonIgnore
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Timestamp updateTime;
-
 }

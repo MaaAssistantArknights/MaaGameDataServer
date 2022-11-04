@@ -2,11 +2,16 @@ package org.maa.server.gamedata.schedule;
 
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.MergeCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
+import org.eclipse.jgit.lib.Constants;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
+import org.maa.server.gamedata.constant.RedisTemplatePrefix;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -27,11 +33,14 @@ public class UpdateGameDataRepoSchedule {
     private static final String repoUrl = "https://github.com/yuanyan3060/Arknights-Bot-Resource";
     private Path repoDirectory = Paths.get("/data/gamedata");
     private final Lock lock = new ReentrantLock();
+    private final StringRedisTemplate redisTemplate;
 
     @Autowired
     public UpdateGameDataRepoSchedule(
-            ApplicationContext applicationContext
+            ApplicationContext applicationContext,
+            StringRedisTemplate redisTemplate
     ) {
+        this.redisTemplate = redisTemplate;
         if (Objects.equals(applicationContext.getEnvironment().getActiveProfiles()[0], "dev")) {
             this.repoDirectory = Paths.get(System.getProperty("user.dir"), "target", "gamedata");
         }
@@ -87,15 +96,36 @@ public class UpdateGameDataRepoSchedule {
             log.info("1. Reading repo from local");
             Repository localRepo = new FileRepository(repoDirectory + "/.git");
             Git git = new Git(localRepo);
-            log.info("2. Pulling repo from {}", repoUrl);
-            git.pull().call();
-            log.info("3. Pulling Finished");
+            log.info("2. Fetching repo from {}", repoUrl);
+            git.fetch().setRemote("origin").call();
+            ObjectId headId = git.getRepository().resolve(Constants.HEAD);
+            ObjectId originId = git.getRepository().resolve("origin/main");
+            log.info("3. Checking repo's HEAD pointer");
+            // remote origin HEAD和本地HEAD不一致，触发更新
+            if (!Objects.equals(headId.toString(), originId.toString())) {
+                log.info("4. Updating repo to origin/main");
+                git.merge().include("main", originId)
+                        .setFastForward(MergeCommand.FastForwardMode.FF_ONLY)
+                        .call();
+                git.checkout().setName("main").call();
+                this.clearRequestCache();
+            } else {
+                log.info("4. Everything is up-to-date");
+            }
+            log.info("5. Updating finished");
         } catch (IOException e) {
             log.error("Exception occurred while reading repo");
             e.printStackTrace();
         } catch (GitAPIException e) {
-            log.error("Exception occurred while pulling repo");
+            log.error("Exception occurred while updating repo");
             e.printStackTrace();
+        }
+    }
+
+    private void clearRequestCache() {
+        Set<String> keys = redisTemplate.keys(RedisTemplatePrefix.REQUEST_CACHE + "*");
+        if (keys != null) {
+            redisTemplate.delete(keys);
         }
     }
 }

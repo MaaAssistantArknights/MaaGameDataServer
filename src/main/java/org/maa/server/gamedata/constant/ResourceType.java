@@ -1,5 +1,7 @@
 package org.maa.server.gamedata.constant;
 
+import java.util.HashMap;
+
 public class ResourceType {
     public enum Type {
         Activity,   // 活动
@@ -46,8 +48,6 @@ public class ResourceType {
         UniequipData,       // 貌似有用的只有职业分支表
         Uniequip,           // 模组
         Zone,               // 关卡区域
-
-        Image,
     }
 
     public static String[] typeList = new String[] {
@@ -95,8 +95,11 @@ public class ResourceType {
             "UniequipData",       // 貌似有用的只有职业分支表
             "Uniequip",           // 模组
             "Zone",               // 关卡区域
-
-            "Image",
     };
+
+    public static HashMap<Type, String> fileMap = new HashMap<>();
+    static {
+        fileMap.put(Type.Activity, "activity_table.json");
+    }
 }
 

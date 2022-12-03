@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public RestResponseBody<?> methodArgumentTypeMismatchExceptionHandler(MethodArgumentTypeMismatchException ex) {
-        log.warn("[missingServletRequestParameterExceptionHandler]", ex);
+        log.warn("[methodArgumentTypeMismatchExceptionHandler]", ex);
         return new RestResponseBody(BAD_REQUEST.getHttpException().getCode(), String.format("请求参数类型错误:%s", ex.getMessage()));
     }
 
@@ -100,7 +100,8 @@ public class GlobalExceptionHandler {
      * 处理系统异常，兜底处理所有的一切
      */
     @ExceptionHandler(value = Exception.class)
-    public RestResponseBody<?> defaultExceptionHandler(HttpServletRequest req, Throwable ex) {
+    public RestResponseBody<?> defaultExceptionHandler(HttpServletRequest req, Throwable ex,Exception e) {
+        log.error(" 内部错误: {}", e.getMessage(), e);
         // 返回 ERROR RestResponseBody
         return new RestResponseBody(INTERNAL_SERVER_ERROR.getHttpException().getCode(), INTERNAL_SERVER_ERROR.getHttpException().getMsg());
     }
